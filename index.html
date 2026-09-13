@@ -16,119 +16,168 @@
         body {
             min-height: 100vh;
             font-family: Arial, Helvetica, sans-serif;
-            background: #292825;
             color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    #77736a 0%,
+                    #3e3c38 35%,
+                    #242321 75%
+                );
+
+            overflow-x: hidden;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1000px;
+        /* Main */
+        .page {
             min-height: 100vh;
-            padding: 60px 50px;
+            max-width: 1100px;
+            margin: auto;
+            padding: 70px 55px;
+
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        /* Profilbereich */
+        /* Profile */
         .profile {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 35px;
         }
 
-        .profile-image {
-            width: 220px;
-            height: 220px;
+        .profile-picture {
+            width: 230px;
+            height: 230px;
+
             border-radius: 50%;
-            background: radial-gradient(
-                circle at 50% 50%,
-                #050505 0 25%,
-                transparent 25.5%
-            ),
-            linear-gradient(
-                to right,
-                #080808 0 35%,
-                transparent 35.5%
-            ),
-            #dedbd1;
+            object-fit: cover;
 
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            flex-shrink: 0;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.45);
+
+            border: 1px solid rgba(255,255,255,0.12);
         }
 
-        .info {
+        .profile-info {
             display: flex;
             flex-direction: column;
         }
 
-        .label {
+        .profile-label {
             font-size: 15px;
+            font-weight: 600;
             margin-bottom: 12px;
-            color: #e5e5e5;
+            color: #ddd9d2;
         }
 
         h1 {
-            font-size: clamp(55px, 9vw, 95px);
-            line-height: 0.95;
+            font-size: clamp(55px, 9vw, 100px);
+            line-height: 0.9;
+
             font-weight: 800;
-            letter-spacing: -5px;
+            letter-spacing: -6px;
+
+            color: #ffffff;
         }
 
-        /* Links */
+        /* Social links */
         .links {
             display: flex;
-            gap: 15px;
-            margin-left: 250px;
+            gap: 14px;
+
+            margin-left: 265px;
             margin-top: 35px;
+
+            flex-wrap: wrap;
         }
 
         .links a {
-            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 125px;
+
+            padding: 14px 25px;
+
+            border-radius: 50px;
+
             color: white;
-            background: #3a3935;
-            border: 1px solid #55534e;
-            padding: 14px 28px;
-            border-radius: 30px;
+            text-decoration: none;
+
             font-size: 16px;
-            font-weight: bold;
-            transition: all 0.25s ease;
+            font-weight: 700;
+
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+
+            backdrop-filter: blur(10px);
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease;
         }
 
         .links a:hover {
+            transform: translateY(-5px);
+
             background: white;
             color: #292825;
-            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.25);
         }
 
-        /* Handy */
+        /* Bottom line */
+        .line {
+            width: 100%;
+            height: 1px;
+
+            margin-top: 70px;
+
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Mobile */
         @media (max-width: 700px) {
-            .container {
-                padding: 40px 25px;
+
+            .page {
+                padding: 45px 25px;
+                justify-content: center;
             }
 
             .profile {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 25px;
             }
 
-            .profile-image {
-                width: 160px;
-                height: 160px;
+            .profile-picture {
+                width: 170px;
+                height: 170px;
             }
 
             h1 {
                 font-size: 58px;
-                letter-spacing: -3px;
+                letter-spacing: -4px;
             }
 
             .links {
                 margin-left: 0;
                 margin-top: 30px;
-                flex-wrap: wrap;
+            }
+
+            .links a {
+                min-width: 110px;
+                padding: 13px 20px;
+            }
+
+            .line {
+                margin-top: 50px;
             }
         }
     </style>
@@ -136,32 +185,61 @@
 
 <body>
 
-    <main class="container">
+    <main class="page">
 
         <section class="profile">
 
-            <div class="profile-image"></div>
+            <img
+                src="pp.jpg"
+                alt="Lerchandro"
+                class="profile-picture"
+            >
 
-            <div class="info">
-                <span class="label">Profil</span>
-                <h1>Lerchandro</h1>
+            <div class="profile-info">
+
+                <span class="profile-label">
+                    Profil
+                </span>
+
+                <h1>
+                    Lerchandro
+                </h1>
+
             </div>
 
         </section>
 
+
         <nav class="links">
-            <a href="https://open.spotify.com/" target="_blank">
+
+            <a
+                href="https://open.spotify.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 Spotify
             </a>
 
-            <a href="https://www.pinterest.com/" target="_blank">
+            <a
+                href="https://www.pinterest.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 Pinterest
             </a>
 
-            <a href="https://www.instagram.com/" target="_blank">
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 Instagram
             </a>
+
         </nav>
+
+
+        <div class="line"></div>
 
     </main>
 
