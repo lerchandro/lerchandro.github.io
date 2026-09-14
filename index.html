@@ -45,8 +45,9 @@
       min-height: 100vh;
 
       /*
-        GRADIENT IS DIRECTLY ON THE PAGE.
-        No pseudo-element = no top seam.
+        THE GRADIENT IS DIRECTLY ON THE PAGE.
+        It fades from light in the center
+        into black as you scroll away.
       */
 
       background:
@@ -74,9 +75,7 @@
 
     .content {
       position: relative;
-
       z-index: 1;
-
       width: 100%;
     }
 
@@ -89,6 +88,7 @@
       position: relative;
 
       width: 100%;
+
       height: 100vh;
       height: 100svh;
 
@@ -103,7 +103,6 @@
 
     /* =========================================
        DARK LINE
-
        LEFT EDGE → CENTER OF CIRCLE
     ========================================= */
 
@@ -114,7 +113,6 @@
       left: 0;
 
       width: 50%;
-
       height: 38px;
 
       transform: translateY(-50%);
@@ -165,48 +163,20 @@
 
 
     /* =========================================
-       DARK SPACE
+       LONG DARK SCROLL SPACE
+
+       This replaces the old image.
+
+       300vh = approximately 3 full
+       additional screen heights of scrolling.
     ========================================= */
 
     .dark-space {
       width: 100%;
 
-      height: 100vh;
+      height: 300vh;
 
       background: transparent;
-    }
-
-
-    /* =========================================
-       SECOND IMAGE
-    ========================================= */
-
-    .second {
-      position: relative;
-
-      width: 100%;
-
-      min-height: 100vh;
-      min-height: 100svh;
-
-      display: flex;
-
-      align-items: flex-start;
-      justify-content: center;
-
-      overflow: hidden;
-    }
-
-    .second img {
-      display: block;
-
-      width: 100vw;
-      max-width: none;
-
-      height: auto;
-
-      object-fit: contain;
-      object-position: center;
     }
 
 
@@ -282,34 +252,17 @@
 
 
       /* -----------------------------------------
-         DARK SPACE
+         LONG DARK SPACE
       ----------------------------------------- */
 
       .dark-space {
-        height: 80vh;
-      }
-
-
-      /* -----------------------------------------
-         SECOND IMAGE
-      ----------------------------------------- */
-
-      .second {
         width: 100%;
 
-        min-height: 100svh;
+        height: 300vh;
+
+        background: transparent;
       }
 
-      .second img {
-        width: 100vw;
-
-        max-width: none;
-
-        height: auto;
-
-        object-fit: contain;
-        object-position: center;
-      }
     }
 
   </style>
@@ -337,24 +290,11 @@
 
 
       <!-- =====================================
-           DARK SPACE
+           LONG EMPTY DARK SPACE
       ====================================== -->
 
       <section class="dark-space"></section>
 
-
-      <!-- =====================================
-           SECOND IMAGE
-      ====================================== -->
-
-      <section class="second">
-
-        <img
-          src="image-2.jpg"
-          alt=""
-        >
-
-      </section>
 
     </div>
 
