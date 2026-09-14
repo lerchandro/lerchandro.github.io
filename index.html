@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +10,14 @@
   >
 
   <title>Light Scroll</title>
-  
-   <!-- Space Grotesk -->
+
+  <!-- Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap"
     rel="stylesheet"
   >
-
 
   <style>
 
@@ -53,12 +53,6 @@
       width: 100%;
       min-height: 100vh;
 
-      /*
-        THE GRADIENT IS DIRECTLY ON THE PAGE.
-        It fades from light in the center
-        into black as you scroll away.
-      */
-
       background:
         radial-gradient(
           ellipse 110vw 110vw at 50% 50vh,
@@ -90,14 +84,13 @@
 
 
     /* =========================================
-       FIRST SECTION
+       HERO
     ========================================= */
 
     .hero {
       position: relative;
 
       width: 100%;
-
       height: 100vh;
       height: 100svh;
 
@@ -112,7 +105,6 @@
 
     /* =========================================
        DARK LINE
-       LEFT EDGE → CENTER OF CIRCLE
     ========================================= */
 
     .dark-line {
@@ -171,10 +163,8 @@
     }
 
 
-
-    
-     /* =========================================
-       TEXT UNDER CIRCLE
+    /* =========================================
+       TEXT
     ========================================= */
 
     .scroll-text {
@@ -199,37 +189,40 @@
 
       letter-spacing: -0.03em;
     }
-    
+
+
     /* =========================================
        IMPRESSUM
     ========================================= */
 
-.impressum {
-  margin-top: 20vh;
-  padding-bottom: 8vh;
+    .impressum {
+      margin-top: 20vh;
+      padding-bottom: 8vh;
 
-  text-align: center;
+      text-align: center;
 
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-}
+      font-family: "Space Grotesk", sans-serif;
 
-.impressum a {
-  color: rgba(255, 255, 255, 0.55);
-  text-decoration: none;
-}
+      font-size: 14px;
 
-.impressum a:hover {
-  color: #fff;
-}
+      font-weight: 300;
+    }
 
+    .impressum a {
+      color: rgba(255, 255, 255, 0.55);
 
+      text-decoration: none;
+    }
 
+    .impressum a:hover {
+      color: #fff;
+    }
 
 
     /* =========================================
        MOBILE
+       Same functionality as desktop,
+       only resize the visual elements.
     ========================================= */
 
     @media (max-width: 600px) {
@@ -254,9 +247,9 @@
       }
 
 
-      /* -----------------------------------------
-         FIRST SCREEN
-      ----------------------------------------- */
+      /* =========================================
+         HERO
+      ========================================= */
 
       .hero {
         width: 100%;
@@ -264,9 +257,9 @@
       }
 
 
-      /* -----------------------------------------
+      /* =========================================
          CIRCLE
-      ----------------------------------------- */
+      ========================================= */
 
       .dark-circle {
         width: 68vw;
@@ -277,18 +270,15 @@
 
         max-width: none;
         max-height: none;
-
-        border-radius: 50%;
       }
 
 
-      /* -----------------------------------------
+      /* =========================================
          LINE
-      ----------------------------------------- */
+      ========================================= */
 
       .dark-line {
         width: 50%;
-
         height: 22px;
 
         transform: translateY(-50%);
@@ -299,16 +289,30 @@
       }
 
 
-      /* -----------------------------------------
-         LONG DARK SPACE
-      ----------------------------------------- */
+      /* =========================================
+         TEXT
+      ========================================= */
 
-      .dark-space {
-        width: 100%;
+      .scroll-text {
+        width: 82vw;
 
-        height: 300vh;
+        margin: 30vw auto 0;
 
-        background: transparent;
+        font-size: clamp(18px, 5vw, 28px);
+
+        line-height: 1.15;
+      }
+
+
+      /* =========================================
+         IMPRESSUM
+      ========================================= */
+
+      .impressum {
+        margin-top: 20vh;
+        padding-bottom: 8vh;
+
+        font-size: 13px;
       }
 
     }
@@ -323,10 +327,7 @@
 
     <div class="content">
 
-
-      <!-- =====================================
-           DARK CIRCLE + HORIZONTAL LINE
-      ====================================== -->
+      <!-- DARK CIRCLE + HORIZONTAL LINE -->
 
       <section class="hero">
 
@@ -335,24 +336,29 @@
         <div class="dark-circle"></div>
 
       </section>
-      
-       <!-- =====================================
-           TEXT
-      ====================================== -->
+
+
+      <!-- TEXT -->
 
       <div class="scroll-text">
 
-       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+        et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquyam erat, sed diam voluptua.
 
       </div>
 
 
+      <!-- IMPRESSUM -->
 
-<div class="impressum">
-  <a href="#">Impressum</a>
-</div>
-
-
+      <div class="impressum">
+        <a href="#">Impressum</a>
+      </div>
 
     </div>
 
