@@ -453,17 +453,13 @@ Because my love is near
 
     function scrollDown() {
 
-      /*
-        Scroll exactly one viewport height.
-      */
+  window.scrollTo({
+    top: document.documentElement.scrollHeight,
+    left: 0,
+    behavior: "smooth"
+  });
 
-      window.scrollBy({
-        top: window.innerHeight,
-        left: 0,
-        behavior: "smooth"
-      });
-
-    }
+}
 
 
     /*
