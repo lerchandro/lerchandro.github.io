@@ -9,6 +9,15 @@
   >
 
   <title>Light Scroll</title>
+  
+   <!-- Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  >
+
 
   <style>
 
@@ -162,22 +171,61 @@
     }
 
 
-    /* =========================================
-       LONG DARK SCROLL SPACE
 
-       This replaces the old image.
-
-       300vh = approximately 3 full
-       additional screen heights of scrolling.
+    
+     /* =========================================
+       TEXT UNDER CIRCLE
     ========================================= */
 
-    .dark-space {
-      width: 100%;
+    .scroll-text {
+      width: 70vw;
+      max-width: 900px;
 
-      height: 300vh;
+      margin: 30vw auto 0;
 
-      background: transparent;
+      text-align: center;
+
+      color: #fff;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: clamp(20px, 2vw, 36px);
+
+      font-weight: 300;
+
+      line-height: 1.1;
+
+      letter-spacing: -0.03em;
     }
+    
+    /* =========================================
+       IMPRESSUM
+    ========================================= */
+
+.impressum {
+  margin-top: 20vh;
+  padding-bottom: 8vh;
+
+  text-align: center;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.impressum a {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+}
+
+.impressum a:hover {
+  color: #fff;
+}
+
+
+
 
 
     /* =========================================
@@ -287,13 +335,23 @@
         <div class="dark-circle"></div>
 
       </section>
-
-
-      <!-- =====================================
-           LONG EMPTY DARK SPACE
+      
+       <!-- =====================================
+           TEXT
       ====================================== -->
 
-      <section class="dark-space"></section>
+      <div class="scroll-text">
+
+       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+      </div>
+
+
+
+<div class="impressum">
+  <a href="#">Impressum</a>
+</div>
+
 
 
     </div>
