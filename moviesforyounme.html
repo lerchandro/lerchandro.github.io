@@ -47,30 +47,62 @@
       text-align: center;
     }
 
-    .text {
-      color: #fff;
+  
+.text {
+  width: 80vw;
+  max-width: 900px;
 
-      font-size: clamp(20px, 2vw, 36px);
-      font-weight: 300;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
+  text-align: center;
 
-      width: 80vw;
-      max-width: 900px;
-    }
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(20px, 2vw, 36px);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.text a {
+  display: block;
+
+  color: #fff;
+  text-decoration: none;
+
+  transition: opacity 200ms ease;
+}
+
+.text a:hover {
+  opacity: 0.5;
+}
   </style>
 </head>
 
 <body>
+ <div class="text">
+  <a
+    href="https://letterboxd.com/film/ferris-buellers-day-off/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Ferris Bueller's Day Off
+  </a>
 
-  <div class="text">
-    Ferries Buelers day off
+  <a
+    href="https://letterboxd.com/film/whiplash-2014/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     Whiplash
-    Holdover
-    
-  </div>
+  </a>
+
+  <a
+    href="https://letterboxd.com/film/the-holdovers/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    The Holdovers
+  </a>
+</div>
 
 </body>
 </html>
-
 
