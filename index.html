@@ -137,6 +137,8 @@
     .dark-circle {
       position: relative;
 
+      display: block;
+
       width: 48vw;
       height: 48vw;
 
@@ -168,9 +170,13 @@
       cursor: pointer;
 
       /*
-        Makes the circle feel like an
-        interactive object without changing
-        the visual design.
+        Removes the default link styling.
+      */
+
+      text-decoration: none;
+
+      /*
+        Makes the circle feel interactive.
       */
 
       transition:
@@ -366,7 +372,7 @@
 
       <!-- =====================================
            HERO
-      ====================================== -->
+      ===================================== -->
 
       <section class="hero" id="top">
 
@@ -374,24 +380,23 @@
 
 
         <!--
-          Clicking the circle scrolls down
-          exactly one viewport.
+          Clicking the circle opens another HTML page.
+          
+          CHANGE "welcome.html" TO YOUR PAGE.
         -->
 
-        <div
+        <a
+          href="linkpage.html"
           class="dark-circle"
-          id="scrollCircle"
-          role="button"
-          tabindex="0"
-          aria-label="Scroll down"
-        ></div>
+          aria-label="Go to welcome page"
+        ></a>
 
       </section>
 
 
       <!-- =====================================
            CONTENT BELOW THE FOLD
-      ====================================== -->
+      ===================================== -->
 
       <div class="scroll-text">
 
@@ -402,7 +407,7 @@
 
       <!-- =====================================
            IMPRESSUM
-      ====================================== -->
+      ===================================== -->
 
       <div class="impressum">
 
@@ -415,68 +420,6 @@
     </div>
 
   </main>
-
-
-  <!-- =========================================
-       SCROLL INTERACTION
-  ========================================== -->
-
-  <script>
-
-    const circle =
-      document.getElementById("scrollCircle");
-
-
-    function scrollDown() {
-
-      window.scrollTo({
-
-        top:
-          document.documentElement.scrollHeight,
-
-        left: 0,
-
-        behavior: "smooth"
-
-      });
-
-    }
-
-
-    /*
-      Mouse / touch click
-    */
-
-    circle.addEventListener(
-      "click",
-      scrollDown
-    );
-
-
-    /*
-      Keyboard accessibility:
-      Enter or Space also activates the circle.
-    */
-
-    circle.addEventListener(
-      "keydown",
-      (event) => {
-
-        if (
-          event.key === "Enter" ||
-          event.key === " "
-        ) {
-
-          event.preventDefault();
-
-          scrollDown();
-
-        }
-
-      }
-    );
-
-  </script>
 
 </body>
 </html>
