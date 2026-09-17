@@ -1,31 +1,31 @@
-\<!DOCTYPE html>
-\<html lang="en">
-\<head>
-  \<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
-  \<meta
+  <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  \>
+  >
 
-  \<title>Light Scroll\</title>
+  <title>Light Scroll</title>
 
-  \<!-- Space Grotesk -->
-  \<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-  \<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <!-- Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  \<link
-    href="[https://fonts.googleapis.com/css2?family=Space+Grotesk\:wght@300;400;500&display=swap](https://fonts.googleapis.com/css2?family=Space+Grotesk\:wght@300;400;500\&display=swap)"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap"
     rel="stylesheet"
-  \>
+  >
 
-  \<style>
+  <style>
 
-    /\* =========================================
+    /* =========================================
        RESET
-    \========================================= \*/
+    ========================================= */
 
-    \* {
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -47,10 +47,9 @@
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        PAGE
-    \========================================= \*/
+    ========================================= */
 
     .page {
       position: relative;
@@ -69,7 +68,7 @@
           rgba(170, 170, 165, 0.18) 60%,
           rgba(60, 60, 55, 0.40) 78%,
           rgba(0, 0, 0, 0.85) 94%,
-          \#000 100%
+          #000 100%
         );
 
       background-repeat: no-repeat;
@@ -77,10 +76,9 @@
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        CONTENT
-    \========================================= \*/
+    ========================================= */
 
     .content {
       position: relative;
@@ -89,10 +87,9 @@
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        HERO
-    \========================================= \*/
+    ========================================= */
 
     .hero {
       position: relative;
@@ -110,10 +107,9 @@
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        DARK LINE
-    \========================================= \*/
+    ========================================= */
 
     .dark-line {
       position: absolute;
@@ -134,10 +130,9 @@
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        DARK CIRCLE
-    \========================================= \*/
+    ========================================= */
 
     .dark-circle {
       position: relative;
@@ -157,9 +152,9 @@
         radial-gradient(
           circle at center,
 
-          \#050505 0%,
-          \#090909 65%,
-          \#111 85%,
+          #050505 0%,
+          #090909 65%,
+          #111 85%,
           rgba(20, 20, 20, 0.95) 100%
         );
 
@@ -172,41 +167,38 @@
 
       cursor: pointer;
 
-      /\*
+      /*
         Makes the circle feel like an
         interactive object without changing
         the visual design.
-      \*/
+      */
 
       transition:
         transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        CIRCLE HOVER
-    \========================================= \*/
+    ========================================= */
 
-    .dark-circle\:hover {
+    .dark-circle:hover {
       transform: scale(1.015);
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        CIRCLE ACTIVE
-    \========================================= \*/
+    ========================================= */
 
-    .dark-circle\:active {
+    .dark-circle:active {
       transform: scale(0.99);
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        TEXT
-    \========================================= \*/
+    ========================================= */
 
     .scroll-text {
       width: 70vw;
@@ -233,10 +225,9 @@
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        IMPRESSUM
-    \========================================= \*/
+    ========================================= */
 
     .impressum {
       margin-top: 20vh;
@@ -260,15 +251,14 @@
       text-decoration: none;
     }
 
-    .impressum a\:hover {
+    .impressum a:hover {
       color: #fff;
     }
 
 
-
-    /\* =========================================
+    /* =========================================
        MOBILE
-    \========================================= \*/
+    ========================================= */
 
     @media (max-width: 600px) {
 
@@ -284,7 +274,7 @@
             rgba(170, 170, 165, 0.18) 60%,
             rgba(60, 60, 55, 0.40) 78%,
             rgba(0, 0, 0, 0.85) 94%,
-            \#000 100%
+            #000 100%
           );
 
         background-repeat: no-repeat;
@@ -292,10 +282,9 @@
       }
 
 
-
-      /\* =====================================
+      /* =====================================
          HERO
-      \====================================== \*/
+      ====================================== */
 
       .hero {
         width: 100%;
@@ -303,10 +292,9 @@
       }
 
 
-
-      /\* =====================================
+      /* =====================================
          CIRCLE
-      \====================================== \*/
+      ====================================== */
 
       .dark-circle {
         width: 68vw;
@@ -320,10 +308,9 @@
       }
 
 
-
-      /\* =====================================
+      /* =====================================
          LINE
-      \====================================== \*/
+      ====================================== */
 
       .dark-line {
         width: 50%;
@@ -337,10 +324,9 @@
       }
 
 
-
-      /\* =====================================
+      /* =====================================
          TEXT
-      \====================================== \*/
+      ====================================== */
 
       .scroll-text {
         width: 82vw;
@@ -354,10 +340,9 @@
       }
 
 
-
-      /\* =====================================
+      /* =====================================
          IMPRESSUM
-      \====================================== \*/
+      ====================================== */
 
       .impressum {
         margin-top: 20vh;
@@ -368,103 +353,99 @@
 
     }
 
-  \</style>
-\</head>
+  </style>
+</head>
 
 
+<body>
 
-\<body>
+  <main class="page">
 
-  \<main class="page">
-
-    \<div class="content">
-
+    <div class="content">
 
 
-      \<!-- =====================================
+      <!-- =====================================
            HERO
-      \====================================== -->
+      ====================================== -->
 
-      \<section class="hero" id="top">
+      <section class="hero" id="top">
 
-        \<div class="dark-line">\</div>
+        <div class="dark-line"></div>
 
 
-
-        \<!--
+        <!--
           Clicking the circle scrolls down
           exactly one viewport.
-        \-->
+        -->
 
-        \<div
+        <div
           class="dark-circle"
           id="scrollCircle"
           role="button"
           tabindex="0"
           aria-label="Scroll down"
-        \>\</div>
+        ></div>
 
-      \</section>
+      </section>
 
 
-
-      \<!-- =====================================
+      <!-- =====================================
            CONTENT BELOW THE FOLD
-      \====================================== -->
+      ====================================== -->
 
-      \<div class="scroll-text">
+      <div class="scroll-text">
 
-Wilkommen auf lerchandro.github.io
+        Welcome
 
-      \</div>
+      </div>
 
 
-
-      \<!-- =====================================
+      <!-- =====================================
            IMPRESSUM
-      \====================================== -->
+      ====================================== -->
 
-      \<div class="impressum">
+      <div class="impressum">
 
-        \<a href="/moviesforyounme.html">
+        <a href="/moviesforyounme.html">
           Movies
-        \</a>
+        </a>
 
-      \</div>
-    
+      </div>
 
-    \</div>
+    </div>
 
-  \</main>
-
+  </main>
 
 
-  \<!-- =========================================
+  <!-- =========================================
        SCROLL INTERACTION
-  \========================================== -->
+  ========================================== -->
 
-  \<script>
+  <script>
 
     const circle =
       document.getElementById("scrollCircle");
 
 
-
     function scrollDown() {
 
-  window\.scrollTo({
-    top: document.documentElement.scrollHeight,
-    left: 0,
-    behavior: "smooth"
-  });
+      window.scrollTo({
 
-}
+        top:
+          document.documentElement.scrollHeight,
+
+        left: 0,
+
+        behavior: "smooth"
+
+      });
+
+    }
 
 
-
-    /\*
+    /*
       Mouse / touch click
-    \*/
+    */
 
     circle.addEventListener(
       "click",
@@ -472,11 +453,10 @@ Wilkommen auf lerchandro.github.io
     );
 
 
-
-    /\*
+    /*
       Keyboard accessibility:
       Enter or Space also activates the circle.
-    \*/
+    */
 
     circle.addEventListener(
       "keydown",
@@ -496,7 +476,7 @@ Wilkommen auf lerchandro.github.io
       }
     );
 
-  \</script>
+  </script>
 
-\</body>
-\</html> 
+</body>
+</html>
