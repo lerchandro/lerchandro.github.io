@@ -6,8 +6,13 @@
 <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0,
-             maximum-scale=1.0, user-scalable=no"
+             maximum-scale=1.0, user-scalable=no,
+             viewport-fit=cover"
 >
+
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <title>Glass Green UI</title>
 
@@ -25,8 +30,13 @@ html,
 body {
     width: 100%;
     height: 100%;
+
     margin: 0;
+    padding: 0;
+
     overflow: hidden;
+
+    background: #000000;
 
     touch-action: manipulation;
 }
@@ -50,6 +60,12 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.22);
 
     font-family: Arial, Helvetica, sans-serif;
+
+    /*
+       Helps prevent the page from
+       creating a white overscroll area.
+    */
+    overscroll-behavior: none;
 }
 
 
@@ -59,11 +75,13 @@ body {
 
 .stage {
     width: 100%;
-    height: 100%;
+    height: 100dvh;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    touch-action: manipulation;
 }
 
 
@@ -79,6 +97,8 @@ body {
     gap: clamp(42px, 5.65vw, 55px);
 
     transform: translateY(13px);
+
+    touch-action: manipulation;
 }
 
 
@@ -99,11 +119,20 @@ body {
 
     border-radius: 50%;
 
-    /* Prevent double-tap zoom */
+    /*
+       Prevent double-tap zoom
+       on mobile browsers.
+    */
     touch-action: manipulation;
 
+    /*
+       FLAT INTERIOR
+    */
     background: rgba(76, 80, 55, 0.38);
 
+    /*
+       VERY SUBTLE DEPTH
+    */
     box-shadow:
         inset 0 1px 2px rgba(220, 225, 180, 0.035),
         inset 0 -2px 4px rgba(0, 0, 0, 0.12),
@@ -115,6 +144,18 @@ body {
     overflow: visible;
 
     cursor: pointer;
+
+    /*
+       Prevent text selection
+       during rapid presses.
+    */
+    user-select: none;
+    -webkit-user-select: none;
+
+    /*
+       Prevent touch highlighting.
+    */
+    -webkit-tap-highlight-color: transparent;
 
     transition:
         transform 0.18s ease,
@@ -161,6 +202,9 @@ body {
             transparent 360deg
         );
 
+    /*
+       THIN OUTER RING
+    */
     -webkit-mask:
         radial-gradient(
             farthest-side,
@@ -239,6 +283,8 @@ body {
 @media (max-width: 600px) {
 
     body {
+        min-height: 100dvh;
+
         background:
             radial-gradient(
                 ellipse 115% 62% at 50% 8%,
@@ -248,6 +294,11 @@ body {
                 #11120e 74%,
                 #000000 100%
             );
+    }
+
+    .stage {
+        width: 100%;
+        height: 100dvh;
     }
 
     .buttons {
@@ -286,6 +337,22 @@ body {
 
         flex-basis: 52px;
     }
+}
+
+
+/* =========================
+   SAFE AREA
+   ========================= */
+
+@supports (padding: env(safe-area-inset-top)) {
+
+    .stage {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+
 }
 
 </style>
@@ -358,45 +425,82 @@ let sequence = "";
    AUDIO
    ========================= */
 
-/*
-   The AudioContext is created after the
-   first user interaction so that browsers
-   allow the sound to play.
-*/
-
 let audioContext = null;
 
 
+/*
+   Create a subtle electronic
+   click sound.
+*/
+
 function playClickSound() {
 
-    // Create audio context on first click
+    /*
+       Create AudioContext only after
+       the user interacts with the page.
+       This is required by mobile browsers.
+    */
+
     if (!audioContext) {
+
         audioContext = new (
             window.AudioContext ||
             window.webkitAudioContext
         )();
-    }
 
-    // Resume if browser has suspended it
-    if (audioContext.state === "suspended") {
-        audioContext.resume();
     }
 
 
     /*
-       Create a short, soft electronic click.
+       Resume the AudioContext if the
+       browser has suspended it.
     */
 
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
+    if (audioContext.state === "suspended") {
+
+        audioContext.resume();
+
+    }
+
+
+    /*
+       Create oscillator.
+    */
+
+    const oscillator =
+        audioContext.createOscillator();
+
+
+    /*
+       Create volume control.
+    */
+
+    const gainNode =
+        audioContext.createGain();
+
+
+    /*
+       Soft sine-wave sound.
+    */
 
     oscillator.type = "sine";
 
-    // Short high-frequency click
+
+    /*
+       Starting frequency.
+    */
+
     oscillator.frequency.setValueAtTime(
         520,
         audioContext.currentTime
     );
+
+
+    /*
+       Quickly lower the pitch.
+       This gives it a physical
+       "click" character.
+    */
 
     oscillator.frequency.exponentialRampToValueAtTime(
         180,
@@ -405,8 +509,7 @@ function playClickSound() {
 
 
     /*
-       Very short volume envelope
-       so the sound feels like a button click.
+       Start almost silent.
     */
 
     gainNode.gain.setValueAtTime(
@@ -414,10 +517,20 @@ function playClickSound() {
         audioContext.currentTime
     );
 
+
+    /*
+       Very quick attack.
+    */
+
     gainNode.gain.exponentialRampToValueAtTime(
         0.055,
         audioContext.currentTime + 0.005
     );
+
+
+    /*
+       Very quick fade out.
+    */
 
     gainNode.gain.exponentialRampToValueAtTime(
         0.0001,
@@ -425,22 +538,41 @@ function playClickSound() {
     );
 
 
+    /*
+       Connect everything.
+    */
+
     oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+
+    gainNode.connect(
+        audioContext.destination
+    );
+
+
+    /*
+       Start sound.
+    */
 
     oscillator.start();
+
+
+    /*
+       Stop sound.
+    */
 
     oscillator.stop(
         audioContext.currentTime + 0.07
     );
+
 }
 
 
 /* =========================
-   GET ALL BUTTONS
+   GET BUTTONS
    ========================= */
 
-const buttons = document.querySelectorAll(".glass-button");
+const buttons =
+    document.querySelectorAll(".glass-button");
 
 
 /* =========================
@@ -454,31 +586,39 @@ buttons.forEach(button => {
         /*
            Play sound on every press.
         */
+
         playClickSound();
 
 
         /*
-           Add the hidden number
-           to the current sequence.
+           Add the hidden button
+           number to the sequence.
         */
+
         sequence += button.dataset.number;
 
 
         /*
-           CORRECT COMBINATION
+           CHECK SECRET CODE
         */
 
         if (sequence === secretCode) {
 
-            window.location.href = "index.html";
+            /*
+               Correct combination.
+               Redirect to index.html.
+            */
+
+            window.location.href =
+                "index.html";
 
             return;
         }
 
 
         /*
-           If the sequence is no longer
-           a possible beginning of the
+           If the current sequence
+           cannot possibly become the
            secret code, reset it.
         */
 
