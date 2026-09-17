@@ -97,14 +97,8 @@ body {
 
     border-radius: 50%;
 
-    /*
-       FLAT INTERIOR
-    */
     background: rgba(76, 80, 55, 0.38);
 
-    /*
-       VERY SUBTLE DEPTH
-    */
     box-shadow:
         inset 0 1px 2px rgba(220, 225, 180, 0.035),
         inset 0 -2px 4px rgba(0, 0, 0, 0.12),
@@ -162,9 +156,6 @@ body {
             transparent 360deg
         );
 
-    /*
-       THIN OUTER RING
-    */
     -webkit-mask:
         radial-gradient(
             farthest-side,
@@ -359,6 +350,88 @@ let sequence = "";
 
 
 /* =========================
+   AUDIO
+   ========================= */
+
+/*
+   The AudioContext is created after the
+   first user interaction so that browsers
+   allow the sound to play.
+*/
+
+let audioContext = null;
+
+
+function playClickSound() {
+
+    // Create audio context on first click
+    if (!audioContext) {
+        audioContext = new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+    }
+
+    // Resume if browser has suspended it
+    if (audioContext.state === "suspended") {
+        audioContext.resume();
+    }
+
+
+    /*
+       Create a short, soft electronic click.
+    */
+
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.type = "sine";
+
+    // Short high-frequency click
+    oscillator.frequency.setValueAtTime(
+        520,
+        audioContext.currentTime
+    );
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+        180,
+        audioContext.currentTime + 0.055
+    );
+
+
+    /*
+       Very short volume envelope
+       so the sound feels like a button click.
+    */
+
+    gainNode.gain.setValueAtTime(
+        0.0001,
+        audioContext.currentTime
+    );
+
+    gainNode.gain.exponentialRampToValueAtTime(
+        0.055,
+        audioContext.currentTime + 0.005
+    );
+
+    gainNode.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioContext.currentTime + 0.065
+    );
+
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+        audioContext.currentTime + 0.07
+    );
+}
+
+
+/* =========================
    GET ALL BUTTONS
    ========================= */
 
@@ -374,8 +447,14 @@ buttons.forEach(button => {
     button.addEventListener("click", () => {
 
         /*
-           Add the hidden number assigned
-           to this button.
+           Play sound on every press.
+        */
+        playClickSound();
+
+
+        /*
+           Add the hidden number
+           to the current sequence.
         */
         sequence += button.dataset.number;
 
@@ -383,6 +462,7 @@ buttons.forEach(button => {
         /*
            CORRECT COMBINATION
         */
+
         if (sequence === secretCode) {
 
             window.location.href = "index.html";
@@ -392,9 +472,11 @@ buttons.forEach(button => {
 
 
         /*
-           If the sequence can no longer
-           become the secret code, reset it.
+           If the sequence is no longer
+           a possible beginning of the
+           secret code, reset it.
         */
+
         if (!secretCode.startsWith(sequence)) {
 
             sequence = "";
