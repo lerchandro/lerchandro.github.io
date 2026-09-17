@@ -27,6 +27,8 @@ body {
     height: 100%;
     margin: 0;
     overflow: hidden;
+
+    touch-action: manipulation;
 }
 
 
@@ -96,6 +98,9 @@ body {
     outline: none;
 
     border-radius: 50%;
+
+    /* Prevent double-tap zoom */
+    touch-action: manipulation;
 
     background: rgba(76, 80, 55, 0.38);
 
