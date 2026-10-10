@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -321,11 +321,11 @@
       max-width: 360px;
     }
 
-    /* FINAL IMAGE AND EDITABLE TEXT */
+    /* FINAL SMALL EMBLEM AND EDITABLE TEXT */
 
     .closing-section {
       width: 100%;
-      padding: 0 7vw 100px;
+      padding: 0 20px 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -333,25 +333,27 @@
     }
 
     .closing-image {
-      width: 100%;
-      max-width: 900px;
+      width: 45px;
+      max-width: 45px;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 0 auto;
     }
 
     .closing-image img {
       display: block;
       width: 100%;
+      max-width: 45px;
       height: auto;
-      max-height: 85vh;
+      max-height: 45px;
       object-fit: contain;
     }
 
     .closing-text {
       width: 100%;
       max-width: 600px;
-      margin-top: 32px;
+      margin-top: 25px;
       text-align: center;
       color: #000;
     }
@@ -449,12 +451,21 @@
         font-size: 15px;
       }
 
+      /* Tiny emblem on mobile */
+
       .closing-section {
         padding: 0 20px 70px;
       }
 
+      .closing-image {
+        width: 30px;
+        max-width: 30px;
+      }
+
       .closing-image img {
-        max-height: none;
+        width: 30px;
+        max-width: 30px;
+        max-height: 30px;
       }
 
       .closing-text {
@@ -516,21 +527,20 @@
 
   <main class="showcase" id="showcase"></main>
 
-  <!-- FINAL IMAGE: logo01.jpg -->
+  <!-- FINAL TINY EMBLEM: logo01.jpg -->
 
   <section class="closing-section">
     <div class="closing-image">
-      <img src="logo01.jpg" alt="LAM logo">
+      <img src="logo01.jpg" alt="LAM emblem">
     </div>
 
     <div class="closing-text">
       <!-- EDIT YOUR HEADING HERE -->
-      <h2>Thank You for Looking</h2>
+      <h2></h2>
 
       <!-- EDIT YOUR TEXT HERE -->
       <p>
-        Add your final text here. You can write anything you want
-        about your work, photography, or creative process.
+        Es wurde keine KI zum erstellen von Fotos genutzt.
       </p>
     </div>
   </section>
@@ -608,7 +618,6 @@
         image.src = filename;
 
         try {
-          // Process images in numerical order.
           await image.decode();
         } catch {
           console.warn(`Could not load: ${filename}`);
