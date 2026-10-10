@@ -1,656 +1,488 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LAM — Showcase</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      background: #fff;
-    }
-
-    body {
-      background: #fff;
-      color: #000;
-      font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* INTRO */
-
-    .intro {
-      width: 100%;
-      height: 100svh;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-    }
-
-    .square-stack {
-      position: relative;
-      width: 420px;
-      height: 420px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      isolation: isolate;
-    }
-
-    .square {
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      background: var(--color);
-      opacity: 0.55;
-      border-radius: 2px;
-      filter: blur(12px);
-      mix-blend-mode: multiply;
-      transform-origin: center;
-      animation: organic-spin var(--duration) ease-in-out
-        var(--delay) infinite alternate;
-      will-change: transform;
-      pointer-events: none;
-    }
-
-    /* RED */
-
-    .square:nth-child(1) {
-      --color: #ff1744;
-      --duration: 3.75s;
-      --delay: -0.3s;
-      width: 250px;
-      height: 250px;
-      opacity: 0.58;
-    }
-
-    .square:nth-child(2) {
-      --color: #ff1744;
-      --duration: 5.25s;
-      --delay: -1.1s;
-      width: 290px;
-      height: 230px;
-      opacity: 0.45;
-    }
-
-    .square:nth-child(3) {
-      --color: #ff1744;
-      --duration: 4.5s;
-      --delay: -0.7s;
-      width: 230px;
-      height: 300px;
-      opacity: 0.50;
-    }
-
-    /* YELLOW */
-
-    .square:nth-child(4) {
-      --color: #ffea00;
-      --duration: 6.5s;
-      --delay: -2s;
-      width: 300px;
-      height: 260px;
-      opacity: 0.65;
-    }
-
-    .square:nth-child(5) {
-      --color: #ffea00;
-      --duration: 4.25s;
-      --delay: -1.4s;
-      width: 270px;
-      height: 280px;
-      opacity: 0.55;
-    }
-
-    .square:nth-child(6) {
-      --color: #ffea00;
-      --duration: 5.75s;
-      --delay: -0.4s;
-      width: 240px;
-      height: 310px;
-      opacity: 0.58;
-    }
-
-    /* BLUE */
-
-    .square:nth-child(7) {
-      --color: #164bff;
-      --duration: 3.5s;
-      --delay: -1.2s;
-      width: 310px;
-      height: 240px;
-      opacity: 0.58;
-    }
-
-    .square:nth-child(8) {
-      --color: #164bff;
-      --duration: 7s;
-      --delay: -0.9s;
-      width: 280px;
-      height: 280px;
-      opacity: 0.50;
-    }
-
-    .square:nth-child(9) {
-      --color: #164bff;
-      --duration: 4.75s;
-      --delay: -1.6s;
-      width: 220px;
-      height: 290px;
-      opacity: 0.62;
-    }
-
-    /* PURPLE */
-
-    .square:nth-child(10) {
-      --color: #8a2be2;
-      --duration: 6s;
-      --delay: -0.6s;
-      width: 300px;
-      height: 300px;
-      opacity: 0.55;
-    }
-
-    .square:nth-child(11) {
-      --color: #8a2be2;
-      --duration: 3.25s;
-      --delay: -0.8s;
-      width: 210px;
-      height: 260px;
-      opacity: 0.65;
-      filter: blur(9px);
-    }
-
-    /* EXTRA OVERLAPPING LAYERS */
-
-    .square:nth-child(12) {
-      --color: #ff1744;
-      --duration: 4s;
-      --delay: -0.2s;
-      width: 260px;
-      height: 210px;
-      opacity: 0.60;
-      filter: blur(10px);
-    }
-
-    .square:nth-child(13) {
-      --color: #ffea00;
-      --duration: 4.75s;
-      --delay: -1.3s;
-      width: 180px;
-      height: 240px;
-      opacity: 0.70;
-      filter: blur(8px);
-    }
-
-    .square:nth-child(14) {
-      --color: #164bff;
-      --duration: 3.75s;
-      --delay: -0.5s;
-      width: 240px;
-      height: 180px;
-      opacity: 0.62;
-      filter: blur(10px);
-    }
-
-    .square:nth-child(15) {
-      --color: #8a2be2;
-      --duration: 5s;
-      --delay: -1s;
-      width: 220px;
-      height: 220px;
-      opacity: 0.72;
-      filter: blur(7px);
-    }
-
-    @keyframes organic-spin {
-      0% {
-        transform: rotate(-25deg) scale(0.85)
-          translate(-8px, 5px);
-      }
-
-      50% {
-        transform: rotate(20deg) scale(1.05)
-          translate(7px, -6px);
-      }
-
-      100% {
-        transform: rotate(65deg) scale(0.92)
-          translate(-4px, -3px);
-      }
-    }
-
-    .stack-label {
-      position: relative;
-      z-index: 2;
-      color: #fff;
-      font-size: 48px;
-      font-weight: 900;
-      letter-spacing: -0.07em;
-      padding-right: 0.07em;
-      user-select: none;
-      pointer-events: none;
-      -webkit-text-stroke: 1px rgba(0, 0, 0, 0.35);
-      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
-    }
-
-    /* SHOWCASE */
-
-    .showcase {
-      width: 100%;
-      padding: 8vw 7vw 5vw;
-      background: #fff;
-    }
-
-    .project {
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.7fr);
-      align-items: center;
-      gap: clamp(28px, 6vw, 100px);
-      margin-bottom: clamp(100px, 16vw, 230px);
-    }
-
-    .project:nth-child(even) {
-      grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.5fr);
-    }
-
-    .project:nth-child(even) .project-image {
-      order: 2;
-    }
-
-    .project:nth-child(even) .project-description {
-      order: 1;
-    }
-
-    .project-image {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 0;
-    }
-
-    .project-image img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 85vh;
-      object-fit: contain;
-    }
-
-    .project-description {
-      max-width: 440px;
-      justify-self: center;
-      width: 100%;
-      color: #000;
-    }
-
-    .project-number {
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      margin-bottom: 24px;
-      color: #777;
-    }
-
-    .project-description h2 {
-      font-size: clamp(25px, 3vw, 44px);
-      line-height: 1.05;
-      font-weight: 500;
-      letter-spacing: -0.045em;
-      margin-bottom: 22px;
-      color: #000;
-    }
-
-    .project-description p {
-      font-size: clamp(14px, 1.1vw, 17px);
-      font-weight: 400;
-      line-height: 1.7;
-      color: #222;
-      max-width: 360px;
-    }
-
-    /* FINAL EMBLEM AND EDITABLE TEXT */
-
-    .closing-section {
-      width: 100%;
-      padding: 0 20px 100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: #fff;
-    }
-
-    .closing-image {
-      width: 70px;
-      height: 70px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-    }
-
-    .closing-image img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .closing-text {
-      width: 100%;
-      max-width: 600px;
-      margin-top: 25px;
-      text-align: center;
-      color: #000;
-    }
-
-    .closing-text h2 {
-      font-size: clamp(25px, 3vw, 40px);
-      line-height: 1.1;
-      font-weight: 500;
-      letter-spacing: -0.045em;
-      margin-bottom: 18px;
-    }
-
-    .closing-text p {
-      font-size: clamp(14px, 1.1vw, 17px);
-      line-height: 1.7;
-      color: #222;
-    }
-
-    /* BACK TO TOP */
-
-    .back-to-top {
-      width: 100%;
-      padding: 20px 20px 70px;
-      display: flex;
-      justify-content: center;
-      background: #fff;
-    }
-
-    .back-to-top button {
-      background: transparent;
-      color: #000;
-      border: 1px solid #000;
-      border-radius: 100px;
-      padding: 16px 30px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .back-to-top button:hover {
-      background: #000;
-      color: #fff;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 700px) {
-      .intro {
-        min-height: 100svh;
-      }
-
-      .square-stack {
-        transform: scale(0.78);
-      }
-
-      .showcase {
-        padding: 24px 20px 40px;
-      }
-
-      .project,
-      .project:nth-child(even) {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 28px;
-        margin-bottom: 100px;
-      }
-
-      .project:nth-child(even) .project-image,
-      .project:nth-child(even) .project-description {
-        order: initial;
-      }
-
-      .project-image img {
-        max-height: none;
-      }
-
-      .project-description {
-        max-width: none;
-        padding: 0 2px;
-      }
-
-      .project-number {
-        margin-bottom: 14px;
-      }
-
-      .project-description h2 {
-        font-size: 30px;
-        margin-bottom: 14px;
-      }
-
-      .project-description p {
-        font-size: 15px;
-      }
-
-      /* Normal small emblem on mobile */
-
-      .closing-section {
-        padding: 0 20px 70px;
-      }
-
-      .closing-image {
-        width: 55px;
-        height: 55px;
-      }
-
-      .closing-text {
-        margin-top: 24px;
-      }
-
-      .closing-text h2 {
-        font-size: 30px;
-      }
-
-      .closing-text p {
-        font-size: 15px;
-      }
-    }
-
-    /* REDUCED MOTION ACCESSIBILITY */
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .square {
-        animation: none;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAM — Showcase</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #111;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* INTRO */
+
+        .intro {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .logo-animation {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        .logo-square {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            animation: colorChange 5s linear infinite;
+        }
+
+        .logo-square:nth-child(1) {
+            top: 0;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .logo-square:nth-child(2) {
+            top: 0;
+            right: 0;
+            animation-delay: 1.25s;
+        }
+
+        .logo-square:nth-child(3) {
+            bottom: 0;
+            left: 0;
+            animation-delay: 2.5s;
+        }
+
+        .logo-square:nth-child(4) {
+            bottom: 0;
+            right: 0;
+            animation-delay: 3.75s;
+        }
+
+        .intro h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            letter-spacing: 0.15em;
+            font-weight: 800;
+        }
+
+        .intro p {
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            color: #777;
+        }
+
+        @keyframes colorChange {
+            0% {
+                background: #ff4d4d;
+            }
+            25% {
+                background: #ffcc00;
+            }
+            50% {
+                background: #25c98b;
+            }
+            75% {
+                background: #3987ff;
+            }
+            100% {
+                background: #b44dff;
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+
+        /* SHOWCASE */
+
+        #showcase {
+            width: 100%;
+        }
+
+        .showcase-item {
+            width: 100%;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5%;
+            padding: 8vw 10%;
+        }
+
+        .showcase-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .image-container,
+        .description {
+            width: 47.5%;
+        }
+
+        .image-container {
+            overflow: hidden;
+            background: #e7e7e7;
+        }
+
+        .image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.035);
+        }
+
+        .description {
+            padding: 20px;
+        }
+
+        .description h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .description p {
+            font-size: clamp(1rem, 1.3vw, 1.15rem);
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* IMAGE REVEAL ANIMATION */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CLOSING SECTION */
+
+        .closing {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 70px 20px;
+            gap: 25px;
+        }
+
+        .closing-image {
+            width: 140px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .closing-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .closing h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .closing p {
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.6;
+        }
+
+        /* BACK TO TOP */
+
+        #backToTop {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #111;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease,
+                transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #backToTop.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #backToTop:hover {
+            background: #444;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+            .intro {
+                min-height: 85vh;
+            }
+
+            .showcase-item,
+            .showcase-item:nth-child(even) {
+                min-height: auto;
+                flex-direction: column;
+                gap: 20px;
+                padding: 45px 6%;
+            }
+
+            .image-container,
+            .description {
+                width: 100%;
+            }
+
+            .description {
+                padding: 15px 5px;
+            }
+
+            .description h2 {
+                margin-bottom: 12px;
+            }
+
+            .closing {
+                min-height: 35vh;
+                padding: 50px 20px;
+                gap: 20px;
+            }
+
+            .closing-image {
+                width: 110px;
+                height: 110px;
+            }
+
+            .closing h2 {
+                font-size: 1.25rem;
+            }
+
+            #backToTop {
+                right: 15px;
+                bottom: 15px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- FIRST SCREEN: COLORED LAM LOGO -->
+    <!-- INTRO -->
+    <section class="intro">
+        <div class="logo-animation" aria-label="LAM Logo">
+            <div class="logo-square"></div>
+            <div class="logo-square"></div>
+            <div class="logo-square"></div>
+            <div class="logo-square"></div>
+        </div>
 
-  <section class="intro" id="top">
-    <div class="square-stack" aria-label="LAM animated color logo">
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
+        <h1>LAM</h1>
+        <p>CREATIVE SHOWCASE</p>
+    </section>
 
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
+    <!-- SHOWCASE IMAGES -->
+    <main id="showcase"></main>
 
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
+    <!-- CLOSING SECTION -->
+    <section class="closing">
+        <div class="closing-image">
+            <img src="logo01.jpg" alt="LAM Emblem">
+        </div>
 
-      <span class="stack-label">LAM</span>
-    </div>
-  </section>
+        <h2></h2>
 
-  <!-- SHOWCASE IMAGES AND DESCRIPTIONS -->
+        <p>Es wurde keine KI zum erstellen von Fotos genutzt.</p>
+    </section>
 
-  <main class="showcase" id="showcase"></main>
-
-  <!-- FINAL EMBLEM: logo01.jpg -->
-
-  <section class="closing-section">
-    <div class="closing-image">
-      <img src="logo01.jpg" alt="LAM emblem">
-    </div>
-
-    <div class="closing-text">
-      <h2></h2>
-
-      <p>
-        Es wurde keine KI zum erstellen von Fotos genutzt.
-      </p>
-    </div>
-  </section>
-
-  <!-- BACK TO TOP -->
-
-  <footer class="back-to-top">
-    <button
-      type="button"
-      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-    >
-      BACK TO TOP ↑
+    <!-- BACK TO TOP -->
+    <button id="backToTop" aria-label="Back to top" title="Back to top">
+        ↑
     </button>
-  </footer>
 
-  <script>
-    const showcase = document.getElementById("showcase");
+    <script>
+        const TOTAL_IMAGES = 20;
 
-    const descriptions = {
-      1: {
-        title: "Untitled 01",
-        text: "Farrahd in Altstadt Rgensburg."
-      },
-      2: {
-        title: "Untitled 02",
-        text: "Noch ein Farrahd."
-      },
-      3: {
-        title: "Untitled 03",
-        text: "Menschen am Strand."
-      },
-      4: {
-        title: "Sonnencreme",
-        text: ""
-      },
-      5: {
-        title: "Trio",
-        text: "LLM URTEIL: Trio – Ein Augenblick der Verbundenheit Drei Menschen stehen am Ufer und genießen den Sonnenuntergang. Das warme Licht und die ruhige Atmosphäre vermitteln ein Gefühl von Freiheit und Zusammengehörigkeit. Die Gesichter bleiben verborgen, wodurch der Moment geheimnisvoll und persönlich wirkt. Als Fotograf möchte ich zeigen, dass oft die einfachen Augenblicke im Leben besonders wertvoll sind. Für mich symbolisiert das Bild Freundschaft, Vergänglichkeit und die Schönheit des gemeinsamen Moments."
-      },
-      6: {
-        title: "Haus",
-        text: "Dach eines Hauses"
-      },
-      7: {
-        title: "Shadow-Gum",
-        text: "Recycled alte Bilder."
-      },
-      8: {
-        title: "D-Lightful",
-        text: "Digital Version"
-      },
-      9: {
-        title: "freedom",
-        text: "boredom"
-      },
-      10: {
-        title: "Untitled Space",
-        text: "Maximalist Version"
-      }
-    };
-
-    const TOTAL_IMAGES = 20;
-
-    async function buildShowcase() {
-      for (let number = 1; number <= TOTAL_IMAGES; number++) {
-        const paddedNumber = String(number).padStart(2, "0");
-        const filename = `image${paddedNumber}.jpg`;
-
-        const image = new Image();
-        image.src = filename;
-
-        try {
-          await image.decode();
-        } catch {
-          console.warn(`Could not load: ${filename}`);
-          continue;
-        }
-
-        const info = descriptions[number] || {
-          title: `Untitled ${paddedNumber}`,
-          text: "Add your description here."
+        const descriptions = {
+            1: {
+                title: "Projekt 01",
+                text: "Eine visuelle Arbeit, bei der Form, Licht und Komposition miteinander verbunden werden."
+            },
+            2: {
+                title: "Projekt 02",
+                text: "Ein experimenteller Ansatz mit besonderem Fokus auf Details und Atmosphäre."
+            },
+            3: {
+                title: "Projekt 03",
+                text: "Eine eigenständige Bildsprache, die durch klare Linien und bewusste Gestaltung entsteht."
+            },
+            4: {
+                title: "Projekt 04",
+                text: "Das Zusammenspiel von Perspektive, Struktur und visueller Wirkung steht im Mittelpunkt."
+            },
+            5: {
+                title: "Projekt 05",
+                text: "Eine weitere kreative Arbeit, die unterschiedliche Formen und Stimmungen kombiniert."
+            },
+            6: {
+                title: "Projekt 06",
+                text: "Eine Studie über Kontraste, Bildaufbau und die Wirkung einzelner Elemente."
+            },
+            7: {
+                title: "Projekt 07",
+                text: "Experimentelle Gestaltung mit einer klaren visuellen Idee und einem eigenen Charakter."
+            },
+            8: {
+                title: "Projekt 08",
+                text: "Hier treffen Details und Gesamtkomposition aufeinander und bilden eine visuelle Einheit."
+            },
+            9: {
+                title: "Projekt 09",
+                text: "Eine kreative Interpretation von Form, Raum und visueller Balance."
+            },
+            10: {
+                title: "Projekt 10",
+                text: "Eine Arbeit, die den Blick auf Gestaltung, Details und die Wirkung des Bildes lenkt."
+            }
         };
 
-        const project = document.createElement("section");
-        project.className = "project";
+        const showcase = document.getElementById("showcase");
 
-        const imageContainer = document.createElement("div");
-        imageContainer.className = "project-image";
+        for (let i = 1; i <= TOTAL_IMAGES; i++) {
+            const item = document.createElement("section");
+            item.className = "showcase-item reveal";
 
-        const displayedImage = document.createElement("img");
-        displayedImage.src = filename;
-        displayedImage.alt = info.title;
-        displayedImage.loading = "lazy";
+            const imageContainer = document.createElement("div");
+            imageContainer.className = "image-container";
 
-        const description = document.createElement("div");
-        description.className = "project-description";
+            const image = document.createElement("img");
+            image.src = `image${String(i).padStart(2, "0")}.jpg`;
+            image.alt = `LAM Showcase Bild ${i}`;
+            image.loading = "lazy";
 
-        const projectNumber = document.createElement("div");
-        projectNumber.className = "project-number";
-        projectNumber.textContent = `${paddedNumber} / LAM`;
+            imageContainer.appendChild(image);
 
-        const heading = document.createElement("h2");
-        heading.textContent = info.title;
+            const description = document.createElement("div");
+            description.className = "description";
 
-        const paragraph = document.createElement("p");
-        paragraph.textContent = info.text;
+            const content = descriptions[i] || {
+                title: `Projekt ${String(i).padStart(2, "0")}`,
+                text: "Eine weitere Arbeit aus dem LAM Showcase."
+            };
 
-        imageContainer.appendChild(displayedImage);
+            const heading = document.createElement("h2");
+            heading.textContent = content.title;
 
-        description.appendChild(projectNumber);
-        description.appendChild(heading);
-        description.appendChild(paragraph);
+            const paragraph = document.createElement("p");
+            paragraph.textContent = content.text;
 
-        project.appendChild(imageContainer);
-        project.appendChild(description);
+            description.appendChild(heading);
+            description.appendChild(paragraph);
 
-        showcase.appendChild(project);
-      }
-    }
+            item.appendChild(imageContainer);
+            item.appendChild(description);
 
-    buildShowcase();
-  </script>
+            showcase.appendChild(item);
+        }
+
+        /* REVEAL ITEMS ON SCROLL */
+
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+        document.querySelectorAll(".reveal").forEach((item) => {
+            revealObserver.observe(item);
+        });
+
+        /* BACK TO TOP BUTTON */
+
+        const backToTop = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.add("visible");
+            } else {
+                backToTop.classList.remove("visible");
+            }
+        });
+
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
 
 </body>
 </html>
