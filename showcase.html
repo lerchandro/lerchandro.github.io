@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAM — Showcase</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: #fff;
+    }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* INTRO */
+
+    .intro {
+      width: 100%;
+      height: 100svh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+
+    .logo-circle {
+      width: clamp(170px, 25vw, 300px);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: clamp(42px, 7vw, 78px);
+      font-weight: 800;
+      letter-spacing: -0.07em;
+      padding-right: 0.07em;
+      user-select: none;
+    }
+
+    /* SHOWCASE */
+
+    .showcase {
+      width: 100%;
+      padding: 8vw 7vw 10vw;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.7fr);
+      align-items: center;
+      gap: clamp(28px, 6vw, 100px);
+      margin-bottom: clamp(100px, 16vw, 230px);
+    }
+
+    /* Alternate image and description */
+
+    .project:nth-child(even) {
+      grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.5fr);
+    }
+
+    .project:nth-child(even) .project-image {
+      order: 2;
+    }
+
+    .project:nth-child(even) .project-description {
+      order: 1;
+    }
+
+    .project-image {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .project-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain;
+    }
+
+    .project-description {
+      max-width: 440px;
+      justify-self: center;
+      width: 100%;
+    }
+
+    .project-number {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+      color: #777;
+    }
+
+    .project-description h2 {
+      font-size: clamp(25px, 3vw, 44px);
+      line-height: 1.05;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      margin-bottom: 22px;
+    }
+
+    .project-description p {
+      font-size: clamp(14px, 1.1vw, 17px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: #222;
+      max-width: 360px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+      .intro {
+        min-height: 100svh;
+      }
+
+      .logo-circle {
+        width: 175px;
+        font-size: 48px;
+      }
+
+      .showcase {
+        padding: 24px 20px 50px;
+      }
+
+      .project,
+      .project:nth-child(even) {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 28px;
+        margin-bottom: 100px;
+      }
+
+      .project:nth-child(even) .project-image,
+      .project:nth-child(even) .project-description {
+        order: initial;
+      }
+
+      .project-image img {
+        max-height: none;
+      }
+
+      .project-description {
+        max-width: none;
+        padding: 0 2px;
+      }
+
+      .project-number {
+        margin-bottom: 14px;
+      }
+
+      .project-description h2 {
+        font-size: 30px;
+        margin-bottom: 14px;
+      }
+
+      .project-description p {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- First screen: only the LAM circle -->
+
+  <section class="intro">
+    <div class="logo-circle">LAM</div>
+  </section>
+
+  <!-- Images and descriptions are inserted below -->
+
+  <main class="showcase" id="showcase"></main>
+
+  <script>
+    /*
+      Images should be named:
+      image01.jpg
+      image02.jpg
+      image03.jpg
+      ...
+      
+      The script automatically continues until the next image
+      filename is missing.
+    */
+
+    const showcase = document.getElementById("showcase");
+
+    // Edit these descriptions to match your images.
+    const descriptions = {
+      1: {
+        title: "Untitled 01",
+        text: "Add your description for the first image here."
+      },
+      2: {
+        title: "Untitled 02",
+        text: "Add your description for the second image here."
+      },
+      3: {
+        title: "Untitled 03",
+        text: "Add your description for the third image here."
+      },
+      4: {
+        title: "Untitled 04",
+        text: "Add your description for the fourth image here."
+      }
+    };
+
+    const MAX_IMAGES = 99;
+    let foundImages = 0;
+
+    function loadImage(number) {
+      if (number > MAX_IMAGES) return;
+
+      const filename = `image${String(number).padStart(2, "0")}.jpg`;
+      const image = new Image();
+
+      image.onload = function () {
+        foundImages++;
+
+        const info = descriptions[number] || {
+          title: `Untitled ${String(number).padStart(2, "0")}`,
+          text: "Add your description for this image here."
+        };
+
+        const project = document.createElement("section");
+        project.className = "project";
+
+        const imageContainer = document.createElement("div");
+        imageContainer.className = "project-image";
+
+        const displayedImage = document.createElement("img");
+        displayedImage.src = filename;
+        displayedImage.alt = info.title;
+        displayedImage.loading = "lazy";
+
+        const description = document.createElement("div");
+        description.className = "project-description";
+
+        const projectNumber = document.createElement("div");
+        projectNumber.className = "project-number";
+        projectNumber.textContent =
+          String(number).padStart(2, "0") + " / LAM";
+
+        const heading = document.createElement("h2");
+        heading.textContent = info.title;
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = info.text;
+
+        imageContainer.appendChild(displayedImage);
+
+        description.appendChild(projectNumber);
+        description.appendChild(heading);
+        description.appendChild(paragraph);
+
+        project.appendChild(imageContainer);
+        project.appendChild(description);
+
+        showcase.appendChild(project);
+      };
+
+      image.onerror = function () {
+        // Stop when the next sequential image doesn't exist.
+      };
+
+      image.src = filename;
+
+      // Check the next filename as well.
+      loadImage(number + 1);
+    }
+
+    loadImage(1);
+  </script>
+
+</body>
+</html>
