@@ -4,20 +4,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-               maximum-scale=1.0, user-scalable=no,
-               viewport-fit=cover">
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
+               user-scalable=no, viewport-fit=cover">
 
 <meta name="theme-color" content="#000000">
-<title>White Glass Image Viewer</title>
+<title>Green Glass Image Viewer</title>
 
 <style>
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -26,26 +24,20 @@ body {
     background: #000;
     font-family: Arial, Helvetica, sans-serif;
     overscroll-behavior: none;
-    touch-action: manipulation;
 }
-
-/* WHITE GRADIENT BACKGROUND */
 
 body {
-    background:
-        radial-gradient(
-            ellipse 72% 75% at 50% 8%,
-            #ffffff 0%,
-            #e8e8e8 22%,
-            #bdbdbd 42%,
-            #555555 66%,
-            #000000 100%
-        );
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: radial-gradient(
+        ellipse 72% 75% at 50% 8%,
+        #5b5e43 0%,
+        #474a34 22%,
+        #2e3022 42%,
+        #151610 66%,
+        #000000 100%
+    );
 }
 
-/* MAIN VIEWER */
+/* VIEWER */
 
 .viewer {
     position: relative;
@@ -67,37 +59,62 @@ body {
 /* IMAGE */
 
 .image-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     width: 100%;
     height: 100%;
     min-width: 0;
     min-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .image {
     display: block;
-
     width: auto;
     height: auto;
     max-width: 100%;
     max-height: 100%;
 
     object-fit: contain;
-    object-position: center;
-
     border-radius: 2px;
 
+    position: relative;
+    z-index: 20;
+
+    cursor: zoom-in;
     user-select: none;
     -webkit-user-drag: none;
 
-    box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.20);
 }
 
-/* WHITE GLASS ARROW BUTTONS */
+/* COUNTER — ALWAYS BELOW THE IMAGE */
+
+.counter {
+    position: fixed;
+    z-index: 5;
+
+    bottom: max(12px, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 7px 12px;
+    border: 1px solid rgba(220, 225, 180, 0.08);
+    border-radius: 20px;
+
+    background: rgba(25, 27, 19, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    color: rgba(235, 238, 210, 0.75);
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    pointer-events: none;
+}
+
+/* GLASS ARROW BUTTONS */
 
 .glass-button {
     width: 78px;
@@ -107,7 +124,7 @@ body {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 10;
+    z-index: 30;
 
     display: flex;
     align-items: center;
@@ -118,55 +135,51 @@ body {
     outline: none;
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(76, 80, 55, 0.38);
 
     box-shadow:
-        inset 0 1px 2px rgba(255, 255, 255, 0.12),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.06),
-        0 3px 12px rgba(0, 0, 0, 0.08);
+        inset 0 1px 2px rgba(220, 225, 180, 0.035),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.12),
+        0 3px 12px rgba(0, 0, 0, 0.10);
 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
-    color: rgba(255, 255, 255, 0.95);
-    font-size: 29px;
+    color: rgba(235, 238, 210, 0.92);
     font-family: Arial, sans-serif;
+    font-size: 29px;
     font-weight: 300;
     line-height: 1;
 
     cursor: pointer;
-    touch-action: manipulation;
-
     user-select: none;
-    -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
 
     transition: background 0.18s ease;
 }
 
-/* SUBTLE SEGMENTED WHITE RIM */
+/* SEGMENTED OUTER RIM */
 
 .glass-button::before {
     content: "";
     position: absolute;
     inset: -1px;
-
     border-radius: 50%;
 
     background: conic-gradient(
         from 125deg,
         transparent 0deg,
         transparent 35deg,
-        rgba(255, 255, 255, 0.08) 52deg,
-        rgba(255, 255, 255, 0.30) 72deg,
-        rgba(255, 255, 255, 0.60) 88deg,
-        rgba(255, 255, 255, 0.12) 108deg,
+        rgba(205, 213, 160, 0.05) 52deg,
+        rgba(215, 222, 170, 0.20) 72deg,
+        rgba(225, 230, 185, 0.34) 88deg,
+        rgba(180, 190, 140, 0.08) 108deg,
         transparent 135deg,
         transparent 205deg,
-        rgba(255, 255, 255, 0.10) 225deg,
-        rgba(255, 255, 255, 0.28) 248deg,
-        rgba(255, 255, 255, 0.50) 268deg,
-        rgba(255, 255, 255, 0.08) 288deg,
+        rgba(185, 195, 145, 0.07) 225deg,
+        rgba(215, 220, 170, 0.18) 248deg,
+        rgba(225, 230, 185, 0.30) 268deg,
+        rgba(170, 180, 130, 0.05) 288deg,
         transparent 315deg,
         transparent 360deg
     );
@@ -194,12 +207,11 @@ body {
     content: "";
     position: absolute;
     inset: -1px;
-
     border-radius: 50%;
 
     box-shadow:
-        7px -5px 9px rgba(255, 255, 255, 0.045),
-        -7px 5px 9px rgba(255, 255, 255, 0.025);
+        7px -5px 9px rgba(190, 200, 145, 0.035),
+        -7px 5px 9px rgba(190, 200, 145, 0.025);
 
     pointer-events: none;
 }
@@ -214,59 +226,31 @@ body {
     right: max(18px, env(safe-area-inset-right));
 }
 
-/* HOVER: LIGHTEN ONLY, NO MOVEMENT */
+/* LIGHTEN ON HOVER WITHOUT MOVEMENT */
 
 .glass-button:hover {
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.20);
+    background: rgba(100, 105, 72, 0.48);
 }
-
-/* PRESS: VERY SLIGHT DARKENING, NO MOVEMENT */
 
 .glass-button:active {
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(65, 69, 48, 0.42);
 }
 
 .glass-button:focus-visible {
-    outline: 1px solid rgba(255, 255, 255, 0.6);
+    outline: 1px solid rgba(225, 230, 185, 0.4);
     outline-offset: 3px;
 }
 
-/* IMAGE COUNTER */
-
-.counter {
-    position: fixed;
-    bottom: max(12px, env(safe-area-inset-bottom));
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-
-    padding: 7px 12px;
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-
-    background: rgba(255, 255, 255, 0.08);
-
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 12px;
-    letter-spacing: 1px;
-
-    pointer-events: none;
-}
-
-/* PORTRAIT SCREENS */
+/* PORTRAIT */
 
 @media (orientation: portrait) {
     .viewer {
         padding-top: max(36px, env(safe-area-inset-top));
         padding-bottom: max(44px, env(safe-area-inset-bottom));
-        padding-left: max(12px, env(safe-area-inset-left));
-        padding-right: max(12px, env(safe-area-inset-right));
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
     .glass-button {
@@ -285,7 +269,7 @@ body {
     }
 }
 
-/* LANDSCAPE SCREENS */
+/* LANDSCAPE */
 
 @media (orientation: landscape) {
     .viewer {
@@ -315,7 +299,63 @@ body {
     }
 }
 
-/* REDUCE MOTION */
+/* HIDE NAVIGATION BUTTONS ON MOBILE / TOUCH DEVICES */
+
+@media (max-width: 600px), (hover: none) and (pointer: coarse) {
+    .glass-button {
+        display: none;
+    }
+}
+
+/* FULLSCREEN IMAGE OVERLAY */
+
+.fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        max(12px, env(safe-area-inset-top))
+        max(12px, env(safe-area-inset-right))
+        max(12px, env(safe-area-inset-bottom))
+        max(12px, env(safe-area-inset-left));
+
+    background: rgba(0, 0, 0, 0.96);
+    cursor: zoom-out;
+    touch-action: manipulation;
+}
+
+.fullscreen.active {
+    display: flex;
+}
+
+.fullscreen img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.fullscreen-hint {
+    position: absolute;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
     .glass-button {
@@ -333,8 +373,9 @@ body {
             class="image"
             id="image"
             src="image01.jpg"
-            alt="Image"
+            alt="Image 1"
             draggable="false"
+            title="Click to view fullscreen"
         >
     </div>
 </main>
@@ -353,6 +394,22 @@ body {
 
 <div class="counter" id="counter">1 / 2</div>
 
+<!-- FULLSCREEN VIEW -->
+
+<div
+    class="fullscreen"
+    id="fullscreen"
+    role="dialog"
+    aria-label="Fullscreen image viewer"
+    aria-modal="true">
+
+    <img id="fullscreenImage" src="image01.jpg" alt="Fullscreen image">
+
+    <div class="fullscreen-hint">
+        Tap image to close · Use ← / → to navigate
+    </div>
+</div>
+
 <script>
 const images = [
     "image01.jpg",
@@ -364,11 +421,21 @@ let current = 0;
 const image = document.getElementById("image");
 const counter = document.getElementById("counter");
 
+const fullscreen = document.getElementById("fullscreen");
+const fullscreenImage = document.getElementById("fullscreenImage");
+
 function showImage(index) {
     current = (index + images.length) % images.length;
 
     image.src = images[current];
+    image.alt = `Image ${current + 1}`;
+
     counter.textContent = `${current + 1} / ${images.length}`;
+
+    if (fullscreen.classList.contains("active")) {
+        fullscreenImage.src = images[current];
+        fullscreenImage.alt = `Image ${current + 1}, fullscreen`;
+    }
 }
 
 function nextImage() {
@@ -379,7 +446,7 @@ function prevImage() {
     showImage(current - 1);
 }
 
-/* BUTTON NAVIGATION */
+/* DESKTOP ARROW BUTTONS */
 
 document.getElementById("next").addEventListener("click", nextImage);
 document.getElementById("prev").addEventListener("click", prevImage);
@@ -391,10 +458,52 @@ document.addEventListener("keydown", event => {
         nextImage();
     } else if (event.key === "ArrowLeft") {
         prevImage();
+    } else if (event.key === "Escape") {
+        closeFullscreen();
     }
 });
 
-/* SWIPE NAVIGATION */
+/* OPEN FULLSCREEN BY CLICKING IMAGE */
+
+image.addEventListener("click", openFullscreen);
+
+function openFullscreen() {
+    fullscreenImage.src = images[current];
+    fullscreenImage.alt = `Image ${current + 1}, fullscreen`;
+
+    fullscreen.classList.add("active");
+
+    if (fullscreen.requestFullscreen) {
+        fullscreen.requestFullscreen().catch(() => {});
+    }
+}
+
+/* CLOSE FULLSCREEN */
+
+function closeFullscreen() {
+    fullscreen.classList.remove("active");
+
+    if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+    }
+}
+
+fullscreen.addEventListener("click", closeFullscreen);
+
+fullscreenImage.addEventListener("click", event => {
+    event.stopPropagation();
+    closeFullscreen();
+});
+
+/* SYNC IF USER EXITS NATIVE FULLSCREEN */
+
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        fullscreen.classList.remove("active");
+    }
+});
+
+/* SWIPE NAVIGATION ON THE MAIN VIEWER */
 
 let touchStartX = 0;
 let touchStartY = 0;
@@ -408,6 +517,9 @@ document.addEventListener("touchstart", event => {
 
 document.addEventListener("touchend", event => {
     if (!event.changedTouches.length) return;
+
+    /* Don't navigate when swiping inside fullscreen */
+    if (fullscreen.classList.contains("active")) return;
 
     const dx = event.changedTouches[0].screenX - touchStartX;
     const dy = event.changedTouches[0].screenY - touchStartY;
