@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +39,8 @@
 
     .square-stack {
       position: relative;
-      width: 420px;
-      height: 420px;
+      width: 540px;
+      height: 540px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -48,16 +49,15 @@
 
     .square {
       position: absolute;
-      width: 260px;
-      height: 260px;
+      width: 320px;
+      height: 320px;
       background: var(--color);
       opacity: 0.55;
       border-radius: 2px;
-      filter: blur(12px);
+      filter: blur(14px);
       mix-blend-mode: multiply;
       transform-origin: center;
-      animation:
-        organic-spin var(--duration) ease-in-out
+      animation: organic-spin var(--duration) ease-in-out
         var(--delay) infinite alternate;
       will-change: transform;
       pointer-events: none;
@@ -67,28 +67,28 @@
 
     .square:nth-child(1) {
       --color: #ff1744;
-      --duration: 1.5s;
+      --duration: 3.2s;
       --delay: -0.3s;
-      width: 250px;
-      height: 250px;
+      width: 310px;
+      height: 310px;
       opacity: 0.58;
     }
 
     .square:nth-child(2) {
       --color: #ff1744;
-      --duration: 2.1s;
+      --duration: 4.2s;
       --delay: -1.1s;
-      width: 290px;
-      height: 230px;
+      width: 360px;
+      height: 290px;
       opacity: 0.45;
     }
 
     .square:nth-child(3) {
       --color: #ff1744;
-      --duration: 1.8s;
+      --duration: 3.7s;
       --delay: -0.7s;
-      width: 230px;
-      height: 300px;
+      width: 290px;
+      height: 370px;
       opacity: 0.50;
     }
 
@@ -96,28 +96,28 @@
 
     .square:nth-child(4) {
       --color: #ffea00;
-      --duration: 2.6s;
+      --duration: 4.8s;
       --delay: -2s;
-      width: 300px;
-      height: 260px;
+      width: 370px;
+      height: 320px;
       opacity: 0.65;
     }
 
     .square:nth-child(5) {
       --color: #ffea00;
-      --duration: 1.7s;
+      --duration: 3.6s;
       --delay: -1.4s;
-      width: 270px;
-      height: 280px;
+      width: 340px;
+      height: 350px;
       opacity: 0.55;
     }
 
     .square:nth-child(6) {
       --color: #ffea00;
-      --duration: 2.3s;
+      --duration: 4.4s;
       --delay: -0.4s;
-      width: 240px;
-      height: 310px;
+      width: 300px;
+      height: 380px;
       opacity: 0.58;
     }
 
@@ -125,28 +125,28 @@
 
     .square:nth-child(7) {
       --color: #164bff;
-      --duration: 1.4s;
+      --duration: 3.1s;
       --delay: -1.2s;
-      width: 310px;
-      height: 240px;
+      width: 380px;
+      height: 300px;
       opacity: 0.58;
     }
 
     .square:nth-child(8) {
       --color: #164bff;
-      --duration: 2.8s;
+      --duration: 5.0s;
       --delay: -0.9s;
-      width: 280px;
-      height: 280px;
+      width: 350px;
+      height: 350px;
       opacity: 0.50;
     }
 
     .square:nth-child(9) {
       --color: #164bff;
-      --duration: 1.9s;
+      --duration: 4.0s;
       --delay: -1.6s;
-      width: 220px;
-      height: 290px;
+      width: 280px;
+      height: 360px;
       opacity: 0.62;
     }
 
@@ -154,78 +154,78 @@
 
     .square:nth-child(10) {
       --color: #8a2be2;
-      --duration: 2.4s;
+      --duration: 4.6s;
       --delay: -0.6s;
-      width: 300px;
-      height: 300px;
+      width: 370px;
+      height: 370px;
       opacity: 0.55;
     }
 
     .square:nth-child(11) {
       --color: #8a2be2;
-      --duration: 1.3s;
+      --duration: 3.4s;
       --delay: -0.8s;
-      width: 210px;
-      height: 260px;
+      width: 270px;
+      height: 320px;
       opacity: 0.65;
-      filter: blur(9px);
+      filter: blur(11px);
     }
 
     /* EXTRA OVERLAPPING LAYERS */
 
     .square:nth-child(12) {
       --color: #ff1744;
-      --duration: 1.6s;
+      --duration: 3.5s;
       --delay: -0.2s;
-      width: 260px;
-      height: 210px;
+      width: 320px;
+      height: 270px;
       opacity: 0.60;
-      filter: blur(10px);
+      filter: blur(12px);
     }
 
     .square:nth-child(13) {
       --color: #ffea00;
-      --duration: 1.9s;
+      --duration: 4s;
       --delay: -1.3s;
-      width: 180px;
-      height: 240px;
+      width: 240px;
+      height: 300px;
       opacity: 0.70;
-      filter: blur(8px);
+      filter: blur(10px);
     }
 
     .square:nth-child(14) {
       --color: #164bff;
-      --duration: 1.5s;
+      --duration: 3.3s;
       --delay: -0.5s;
-      width: 240px;
-      height: 180px;
+      width: 300px;
+      height: 240px;
       opacity: 0.62;
-      filter: blur(10px);
+      filter: blur(12px);
     }
 
     .square:nth-child(15) {
       --color: #8a2be2;
-      --duration: 2s;
+      --duration: 4.1s;
       --delay: -1s;
-      width: 220px;
-      height: 220px;
+      width: 280px;
+      height: 280px;
       opacity: 0.72;
-      filter: blur(7px);
+      filter: blur(9px);
     }
 
     @keyframes organic-spin {
       0% {
-        transform: rotate(-25deg) scale(0.85)
+        transform: rotate(-25deg) scale(0.90)
           translate(-8px, 5px);
       }
 
       50% {
-        transform: rotate(20deg) scale(1.05)
+        transform: rotate(20deg) scale(1.03)
           translate(7px, -6px);
       }
 
       100% {
-        transform: rotate(65deg) scale(0.92)
+        transform: rotate(65deg) scale(0.94)
           translate(-4px, -3px);
       }
     }
@@ -234,16 +234,15 @@
       position: relative;
       z-index: 2;
       color: #fff;
-      font-size: 48px;
+      font-size: clamp(64px, 7vw, 76px);
       font-weight: 900;
       letter-spacing: -0.07em;
       padding-right: 0.07em;
       user-select: none;
       pointer-events: none;
-      -webkit-text-stroke: 1px rgba(0, 0, 0, 0.35);
+      -webkit-text-stroke: 1.3px rgba(0, 0, 0, 0.35);
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     }
-
 
     /* SHOWCASE */
 
@@ -260,8 +259,6 @@
       gap: clamp(28px, 6vw, 100px);
       margin-bottom: clamp(100px, 16vw, 230px);
     }
-
-    /* Alternate image and description */
 
     .project:nth-child(even) {
       grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.5fr);
@@ -358,7 +355,11 @@
       }
 
       .square-stack {
-        transform: scale(0.78);
+        transform: scale(0.88);
+      }
+
+      .stack-label {
+        font-size: 68px;
       }
 
       .showcase {
@@ -403,8 +404,13 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .square { animation: none; }
+      html {
+        scroll-behavior: auto;
+      }
+
+      .square {
+        animation: none;
+      }
     }
   </style>
 </head>
