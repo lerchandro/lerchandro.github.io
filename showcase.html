@@ -194,106 +194,90 @@
 
   <main class="showcase" id="showcase"></main>
 
-  <script>
-    /*
-      Images should be named:
-      image01.jpg
-      image02.jpg
-      image03.jpg
-      ...
-      
-      The script automatically continues until the next image
-      filename is missing.
-    */
 
-    const showcase = document.getElementById("showcase");
+<script>
+  const showcase = document.getElementById("showcase");
 
-    // Edit these descriptions to match your images.
-    const descriptions = {
-      1: {
-        title: "Untitled 01",
-        text: "Add your description for the first image here."
-      },
-      2: {
-        title: "Untitled 02",
-        text: "Add your description for the second image here."
-      },
-      3: {
-        title: "Untitled 03",
-        text: "Add your description for the third image here."
-      },
-      4: {
-        title: "Untitled 04",
-        text: "Add your description for the fourth image here."
-      }
-    };
+  const descriptions = {
+    1: {
+      title: "Untitled 01",
+      text: "Add your description for the first image here."
+    },
+    2: {
+      title: "Untitled 02",
+      text: "Add your description for the second image here."
+    },
+    3: {
+      title: "Untitled 03",
+      text: "Add your description for the third image here."
+    }
+  };
 
-    const MAX_IMAGES = 99;
-    let foundImages = 0;
+  // Set this to the total number of images you have.
+  const TOTAL_IMAGES = 20;
 
-    function loadImage(number) {
-      if (number > MAX_IMAGES) return;
-
+  async function buildShowcase() {
+    for (let number = 1; number <= TOTAL_IMAGES; number++) {
       const filename = `image${String(number).padStart(2, "0")}.jpg`;
+
       const image = new Image();
-
-      image.onload = function () {
-        foundImages++;
-
-        const info = descriptions[number] || {
-          title: `Untitled ${String(number).padStart(2, "0")}`,
-          text: "Add your description for this image here."
-        };
-
-        const project = document.createElement("section");
-        project.className = "project";
-
-        const imageContainer = document.createElement("div");
-        imageContainer.className = "project-image";
-
-        const displayedImage = document.createElement("img");
-        displayedImage.src = filename;
-        displayedImage.alt = info.title;
-        displayedImage.loading = "lazy";
-
-        const description = document.createElement("div");
-        description.className = "project-description";
-
-        const projectNumber = document.createElement("div");
-        projectNumber.className = "project-number";
-        projectNumber.textContent =
-          String(number).padStart(2, "0") + " / LAM";
-
-        const heading = document.createElement("h2");
-        heading.textContent = info.title;
-
-        const paragraph = document.createElement("p");
-        paragraph.textContent = info.text;
-
-        imageContainer.appendChild(displayedImage);
-
-        description.appendChild(projectNumber);
-        description.appendChild(heading);
-        description.appendChild(paragraph);
-
-        project.appendChild(imageContainer);
-        project.appendChild(description);
-
-        showcase.appendChild(project);
-      };
-
-      image.onerror = function () {
-        // Stop when the next sequential image doesn't exist.
-      };
-
       image.src = filename;
 
-      // Check the next filename as well.
-      loadImage(number + 1);
-    }
+      try {
+        // Wait for each image before adding the next one.
+        await image.decode();
+      } catch {
+        console.warn(`Image not found or could not load: ${filename}`);
+        continue;
+      }
 
-    loadImage(1);
-  </script>
+      const info = descriptions[number] || {
+        title: `Untitled ${String(number).padStart(2, "0")}`,
+        text: "Add your description here."
+      };
+
+      const project = document.createElement("section");
+      project.className = "project";
+
+      const imageContainer = document.createElement("div");
+      imageContainer.className = "project-image";
+
+      const displayedImage = document.createElement("img");
+      displayedImage.src = filename;
+      displayedImage.alt = info.title;
+      displayedImage.loading = "lazy";
+
+      const description = document.createElement("div");
+      description.className = "project-description";
+
+      const projectNumber = document.createElement("div");
+      projectNumber.className = "project-number";
+      projectNumber.textContent =
+        `${String(number).padStart(2, "0")} / LAM`;
+
+      const heading = document.createElement("h2");
+      heading.textContent = info.title;
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent = info.text;
+
+      imageContainer.appendChild(displayedImage);
+
+      description.appendChild(projectNumber);
+      description.appendChild(heading);
+      description.appendChild(paragraph);
+
+      project.appendChild(imageContainer);
+      project.appendChild(description);
+
+      // Appending sequentially preserves the exact filename order.
+      showcase.appendChild(project);
+    }
+  }
+
+  buildShowcase();
+</script>
+
 
 </body>
 </html>
