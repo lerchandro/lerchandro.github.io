@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Viewer</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #111;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #viewer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    #image {
+        display: block;
+        object-fit: contain;
+        max-width: 100vw;
+        max-height: 100vh;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    /* Portrait screens: maximize image width */
+    @media (orientation: portrait) {
+        #image {
+            width: 100vw;
+            height: auto;
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+    }
+
+    /* Landscape screens: maximize image height */
+    @media (orientation: landscape) {
+        #image {
+            width: auto;
+            height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+    }
+
+    .nav {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        border-radius: 8px;
+        padding: 18px 14px;
+        background: rgba(0, 0, 0, 0.45);
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        z-index: 10;
+        user-select: none;
+    }
+
+    .nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    #prev {
+        left: 10px;
+    }
+
+    #next {
+        right: 10px;
+    }
+
+    #counter {
+        position: fixed;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.55);
+        padding: 7px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 10;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="viewer">
+    <img id="image" src="" alt="Image">
+</div>
+
+<button class="nav" id="prev" aria-label="Previous image">&#10094;</button>
+<button class="nav" id="next" aria-label="Next image">&#10095;</button>
+<div id="counter"></div>
+
+<script>
+    // Add your image filenames here.
+    // Images must be in the same folder as this HTML file.
+    const images = [
+        "image1.jpg",
+        "image2.jpg",
+        "image3.png",
+        "photo 4.webp"
+    ];
+
+    let current = 0;
+
+    const img = document.getElementById("image");
+    const counter = document.getElementById("counter");
+
+    function showImage(index) {
+        current = (index + images.length) % images.length;
+
+        img.src = images[current];
+        counter.textContent =
+            (current + 1) + " / " + images.length;
+    }
+
+    function nextImage() {
+        showImage(current + 1);
+    }
+
+    function prevImage() {
+        showImage(current - 1);
+    }
+
+    document.getElementById("next").addEventListener("click", nextImage);
+    document.getElementById("prev").addEventListener("click", prevImage);
+
+    // Keyboard navigation
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "ArrowRight") {
+            nextImage();
+        } else if (event.key === "ArrowLeft") {
+            prevImage();
+        }
+    });
+
+    // Touch/swipe navigation
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    document.addEventListener("touchstart", function(event) {
+        touchStartX = event.changedTouches[0].screenX;
+        touchStartY = event.changedTouches[0].screenY;
+    }, { passive: true });
+
+    document.addEventListener("touchend", function(event) {
+        const dx = event.changedTouches[0].screenX - touchStartX;
+        const dy = event.changedTouches[0].screenY - touchStartY;
+
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+            if (dx < 0) {
+                nextImage();
+            } else {
+                prevImage();
+            }
+        }
+    }, { passive: true });
+
+    // Display the first image
+    if (images.length > 0) {
+        showImage(0);
+    }
+</script>
+
+</body>
+</html>
