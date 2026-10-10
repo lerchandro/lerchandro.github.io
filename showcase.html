@@ -15,27 +15,14 @@
 
     html {
       scroll-behavior: smooth;
-      background: #000;
+      background: #fff;
     }
 
     body {
-      color: #fff;
+      background: #fff;
+      color: #000;
       font-family: Arial, Helvetica, sans-serif;
       overflow-x: hidden;
-
-      /* Green glow around the circle, fading into black below */
-      background:
-        radial-gradient(
-          ellipse 75% 65% at 50% 8%,
-          #737958 0%,
-          #555a3d 25%,
-          #303322 52%,
-          #11120d 78%,
-          #000 100%
-        );
-      background-repeat: no-repeat;
-      background-size: 100% 1500px;
-      background-color: #000;
     }
 
     /* INTRO */
@@ -47,7 +34,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent;
+      background: #fff;
     }
 
     .logo-circle {
@@ -72,6 +59,7 @@
     .showcase {
       width: 100%;
       padding: 8vw 7vw 5vw;
+      background: #fff;
     }
 
     .project {
@@ -116,14 +104,14 @@
       max-width: 440px;
       justify-self: center;
       width: 100%;
-      color: #fff;
+      color: #000;
     }
 
     .project-number {
       font-size: 12px;
       letter-spacing: 0.08em;
       margin-bottom: 24px;
-      color: #aaa;
+      color: #777;
     }
 
     .project-description h2 {
@@ -132,14 +120,14 @@
       font-weight: 500;
       letter-spacing: -0.045em;
       margin-bottom: 22px;
-      color: #fff;
+      color: #000;
     }
 
     .project-description p {
       font-size: clamp(14px, 1.1vw, 17px);
       font-weight: 400;
       line-height: 1.7;
-      color: #e0e0e0;
+      color: #222;
       max-width: 360px;
     }
 
@@ -150,13 +138,13 @@
       padding: 20px 20px 70px;
       display: flex;
       justify-content: center;
-      background: transparent;
+      background: #fff;
     }
 
     .back-to-top button {
       background: transparent;
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.65);
+      color: #000;
+      border: 1px solid #000;
       border-radius: 100px;
       padding: 16px 30px;
       font-family: Arial, Helvetica, sans-serif;
@@ -167,8 +155,8 @@
     }
 
     .back-to-top button:hover {
-      background: #fff;
-      color: #000;
+      background: #000;
+      color: #fff;
     }
 
     /* MOBILE */
@@ -228,20 +216,23 @@
 
 <body>
 
-  <!-- INTRO -->
+  <!-- FIRST SCREEN: LAM CIRCLE -->
 
   <section class="intro" id="top">
     <div class="logo-circle">LAM</div>
   </section>
 
-  <!-- SHOWCASE -->
+  <!-- IMAGES AND DESCRIPTIONS -->
 
   <main class="showcase" id="showcase"></main>
 
   <!-- BACK TO TOP -->
 
   <footer class="back-to-top">
-    <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+    <button
+      type="button"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    >
       BACK TO TOP ↑
     </button>
   </footer>
@@ -249,6 +240,7 @@
   <script>
     const showcase = document.getElementById("showcase");
 
+    // Add or edit descriptions for your images here.
     const descriptions = {
       1: {
         title: "Untitled 01",
@@ -261,28 +253,32 @@
       3: {
         title: "Untitled 03",
         text: "Add your description for the third image here."
+      },
+      4: {
+        title: "Untitled 04",
+        text: "Add your description for the fourth image here."
       }
     };
 
-    // Change this to the total number of images.
+    // Set this to the number of your last image.
+    // Example: image37.jpg means TOTAL_IMAGES = 37.
     const TOTAL_IMAGES = 20;
 
     async function buildShowcase() {
       for (let number = 1; number <= TOTAL_IMAGES; number++) {
-        const filename =
-          `image${String(number).padStart(2, "0")}.jpg`;
+        const paddedNumber = String(number).padStart(2, "0");
+        const filename = `image${paddedNumber}.jpg`;
 
         const image = new Image();
         image.src = filename;
 
         try {
+          // Process images in numerical order.
           await image.decode();
         } catch {
           console.warn(`Could not load: ${filename}`);
           continue;
         }
-
-        const paddedNumber = String(number).padStart(2, "0");
 
         const info = descriptions[number] || {
           title: `Untitled ${paddedNumber}`,
@@ -322,7 +318,7 @@
         project.appendChild(imageContainer);
         project.appendChild(description);
 
-        // Append one at a time to preserve numeric order.
+        // Add each image before moving to the next.
         showcase.appendChild(project);
       }
     }
