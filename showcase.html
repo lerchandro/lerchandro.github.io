@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -479,6 +478,38 @@
       pointer-events: none;
     }
 
+    /* FULLSCREEN IMAGE VIEWER */
+
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.95);
+      opacity: 0;
+      visibility: hidden;
+      cursor: zoom-out;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .image-lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .image-lightbox img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      cursor: zoom-out;
+    }
+
     /* MOBILE */
 
     @media (max-width: 700px) {
@@ -573,7 +604,8 @@
       .closing-image,
       .closing-text,
       .project-image img,
-      .floating-top {
+      .floating-top,
+      .image-lightbox {
         transition: none;
         transform: none;
       }
@@ -653,7 +685,7 @@
 
   <button
     type="button"
-    class="floating-top"
+    class="floating-top is-hidden"
     id="floatingTop"
     aria-label="Back to top"
     onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
@@ -661,8 +693,55 @@
     BACK TO TOP ↑
   </button>
 
+  <!-- FULLSCREEN IMAGE VIEWER -->
+
+  <div
+    class="image-lightbox"
+    id="imageLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Fullscreen image"
+    aria-hidden="true"
+  >
+    <img src="" alt="" id="lightboxImage">
+  </div>
+
   <script>
     const showcase = document.getElementById("showcase");
+
+    // FULLSCREEN IMAGE VIEWER
+
+    const imageLightbox = document.getElementById("imageLightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+
+    document.addEventListener("click", event => {
+      const image = event.target.closest("img");
+
+      if (!image || image === lightboxImage) return;
+
+      imageLightbox.classList.add("is-open");
+      imageLightbox.setAttribute("aria-hidden", "false");
+
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt;
+
+      document.body.style.overflow = "hidden";
+    });
+
+    function closeLightbox() {
+      imageLightbox.classList.remove("is-open");
+      imageLightbox.setAttribute("aria-hidden", "true");
+      lightboxImage.src = "";
+      document.body.style.overflow = "";
+    }
+
+    imageLightbox.addEventListener("click", closeLightbox);
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+    });
 
     // EDIT YOUR SHOWCASE DESCRIPTIONS HERE.
 
@@ -739,19 +818,33 @@
       revealObserver.observe(element);
     });
 
-    /* FLOATING BUTTON: HIDE AT THE PAGE BOTTOM */
+    /* FLOATING BUTTON: HIDE AT TOP AND PAGE BOTTOM */
 
     const floatingTop = document.getElementById("floatingTop");
     const pageFooter = document.querySelector(".back-to-top");
 
+    let footerIsVisible = false;
+
+    function updateFloatingTop() {
+      const isAtTop = window.scrollY <= 10;
+
+      floatingTop.classList.toggle(
+        "is-hidden",
+        isAtTop || footerIsVisible
+      );
+    }
+
+    window.addEventListener("scroll", updateFloatingTop, {
+      passive: true
+    });
+
     const footerObserver = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-          floatingTop.classList.toggle(
-            "is-hidden",
-            entry.isIntersecting
-          );
+          footerIsVisible = entry.isIntersecting;
         });
+
+        updateFloatingTop();
       },
       {
         threshold: 0.05
@@ -759,6 +852,7 @@
     );
 
     footerObserver.observe(pageFooter);
+    updateFloatingTop();
 
     async function buildShowcase() {
       for (let number = 1; number <= TOTAL_IMAGES; number++) {
