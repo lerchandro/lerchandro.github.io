@@ -9,7 +9,7 @@
                viewport-fit=cover">
 
 <meta name="theme-color" content="#000000">
-<title>Glass Image Viewer</title>
+<title>White Glass Image Viewer</title>
 
 <style>
 * {
@@ -29,18 +29,19 @@ body {
     touch-action: manipulation;
 }
 
-/* GREEN GRADIENT BACKGROUND */
+/* WHITE GRADIENT BACKGROUND */
 
 body {
     background:
         radial-gradient(
             ellipse 72% 75% at 50% 8%,
-            #5b5e43 0%,
-            #474a34 22%,
-            #2e3022 42%,
-            #151610 66%,
+            #ffffff 0%,
+            #e8e8e8 22%,
+            #bdbdbd 42%,
+            #555555 66%,
             #000000 100%
         );
+
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -63,11 +64,9 @@ body {
         max(28px, env(safe-area-inset-left));
 }
 
-/* IMAGE AND REFLECTION */
+/* IMAGE */
 
 .image-container {
-    position: relative;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,11 +80,10 @@ body {
 .image {
     display: block;
 
-    max-width: 100%;
-    max-height: 100%;
-
     width: auto;
     height: auto;
+    max-width: 100%;
+    max-height: 100%;
 
     object-fit: contain;
     object-position: center;
@@ -97,63 +95,9 @@ body {
 
     box-shadow:
         0 12px 35px rgba(0, 0, 0, 0.20);
-
-    position: relative;
-    z-index: 2;
 }
 
-/* REFLECTION BELOW THE IMAGE */
-
-.reflection {
-    position: absolute;
-
-    top: calc(50% + 1px);
-    left: 50%;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-
-    transform: translateX(-50%);
-    pointer-events: none;
-    overflow: hidden;
-
-    opacity: 0.13;
-
-    -webkit-mask-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.65) 0%,
-        rgba(0, 0, 0, 0.18) 35%,
-        transparent 75%
-    );
-
-    mask-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.65) 0%,
-        rgba(0, 0, 0, 0.18) 35%,
-        transparent 75%
-    );
-}
-
-.reflection img {
-    display: block;
-
-    width: auto;
-    height: auto;
-
-    max-width: 100%;
-    max-height: 100%;
-
-    object-fit: contain;
-
-    transform: scaleY(-1);
-    filter: blur(1px);
-}
-
-/* GLASS ARROW BUTTONS */
+/* WHITE GLASS ARROW BUTTONS */
 
 .glass-button {
     width: 78px;
@@ -162,6 +106,7 @@ body {
 
     position: fixed;
     top: 50%;
+    transform: translateY(-50%);
     z-index: 10;
 
     display: flex;
@@ -173,17 +118,17 @@ body {
     outline: none;
     border-radius: 50%;
 
-    background: rgba(76, 80, 55, 0.38);
+    background: rgba(255, 255, 255, 0.12);
 
     box-shadow:
-        inset 0 1px 2px rgba(220, 225, 180, 0.035),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.12),
-        0 3px 12px rgba(0, 0, 0, 0.10);
+        inset 0 1px 2px rgba(255, 255, 255, 0.12),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.06),
+        0 3px 12px rgba(0, 0, 0, 0.08);
 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
-    color: rgba(235, 238, 210, 0.92);
+    color: rgba(255, 255, 255, 0.95);
     font-size: 29px;
     font-family: Arial, sans-serif;
     font-weight: 300;
@@ -196,12 +141,10 @@ body {
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
 
-    transition:
-        transform 0.18s ease,
-        background 0.18s ease;
+    transition: background 0.18s ease;
 }
 
-/* SEGMENTED GLASS RIM */
+/* SUBTLE SEGMENTED WHITE RIM */
 
 .glass-button::before {
     content: "";
@@ -214,16 +157,16 @@ body {
         from 125deg,
         transparent 0deg,
         transparent 35deg,
-        rgba(205, 213, 160, 0.05) 52deg,
-        rgba(215, 222, 170, 0.20) 72deg,
-        rgba(225, 230, 185, 0.34) 88deg,
-        rgba(180, 190, 140, 0.08) 108deg,
+        rgba(255, 255, 255, 0.08) 52deg,
+        rgba(255, 255, 255, 0.30) 72deg,
+        rgba(255, 255, 255, 0.60) 88deg,
+        rgba(255, 255, 255, 0.12) 108deg,
         transparent 135deg,
         transparent 205deg,
-        rgba(185, 195, 145, 0.07) 225deg,
-        rgba(215, 220, 170, 0.18) 248deg,
-        rgba(225, 230, 185, 0.30) 268deg,
-        rgba(170, 180, 130, 0.05) 288deg,
+        rgba(255, 255, 255, 0.10) 225deg,
+        rgba(255, 255, 255, 0.28) 248deg,
+        rgba(255, 255, 255, 0.50) 268deg,
+        rgba(255, 255, 255, 0.08) 288deg,
         transparent 315deg,
         transparent 360deg
     );
@@ -255,8 +198,8 @@ body {
     border-radius: 50%;
 
     box-shadow:
-        7px -5px 9px rgba(190, 200, 145, 0.035),
-        -7px 5px 9px rgba(190, 200, 145, 0.025);
+        7px -5px 9px rgba(255, 255, 255, 0.045),
+        -7px 5px 9px rgba(255, 255, 255, 0.025);
 
     pointer-events: none;
 }
@@ -271,19 +214,22 @@ body {
     right: max(18px, env(safe-area-inset-right));
 }
 
-/* INTERACTIONS */
+/* HOVER: LIGHTEN ONLY, NO MOVEMENT */
 
 .glass-button:hover {
-    transform: translateY(-50%) scale(1.04);
-    background: rgba(82, 87, 59, 0.44);
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.20);
 }
 
+/* PRESS: VERY SLIGHT DARKENING, NO MOVEMENT */
+
 .glass-button:active {
-    transform: translateY(-50%) scale(0.96);
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .glass-button:focus-visible {
-    outline: 1px solid rgba(225, 230, 185, 0.4);
+    outline: 1px solid rgba(255, 255, 255, 0.6);
     outline-offset: 3px;
 }
 
@@ -298,14 +244,15 @@ body {
 
     padding: 7px 12px;
 
-    border: 1px solid rgba(220, 225, 180, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 20px;
 
-    background: rgba(25, 27, 19, 0.28);
+    background: rgba(255, 255, 255, 0.08);
+
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 
-    color: rgba(235, 238, 210, 0.7);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 12px;
     letter-spacing: 1px;
 
@@ -320,11 +267,6 @@ body {
         padding-bottom: max(44px, env(safe-area-inset-bottom));
         padding-left: max(12px, env(safe-area-inset-left));
         padding-right: max(12px, env(safe-area-inset-right));
-    }
-
-    .image {
-        max-width: 100%;
-        max-height: 100%;
     }
 
     .glass-button {
@@ -352,11 +294,6 @@ body {
         padding-left: max(90px, env(safe-area-inset-left));
         padding-right: max(90px, env(safe-area-inset-right));
     }
-
-    .image {
-        max-width: 100%;
-        max-height: 100%;
-    }
 }
 
 /* SMALL PHONES */
@@ -378,7 +315,7 @@ body {
     }
 }
 
-/* REDUCE MOTION IF REQUESTED */
+/* REDUCE MOTION */
 
 @media (prefers-reduced-motion: reduce) {
     .glass-button {
@@ -391,7 +328,6 @@ body {
 <body>
 
 <main class="viewer">
-
     <div class="image-container">
         <img
             class="image"
@@ -400,12 +336,7 @@ body {
             alt="Image"
             draggable="false"
         >
-
-        <div class="reflection" aria-hidden="true">
-            <img id="reflectionImage" src="image01.jpg" alt="">
-        </div>
     </div>
-
 </main>
 
 <button
@@ -431,15 +362,12 @@ const images = [
 let current = 0;
 
 const image = document.getElementById("image");
-const reflectionImage = document.getElementById("reflectionImage");
 const counter = document.getElementById("counter");
 
 function showImage(index) {
     current = (index + images.length) % images.length;
 
     image.src = images[current];
-    reflectionImage.src = images[current];
-
     counter.textContent = `${current + 1} / ${images.length}`;
 }
 
@@ -451,10 +379,12 @@ function prevImage() {
     showImage(current - 1);
 }
 
+/* BUTTON NAVIGATION */
+
 document.getElementById("next").addEventListener("click", nextImage);
 document.getElementById("prev").addEventListener("click", prevImage);
 
-/* Keyboard navigation */
+/* KEYBOARD NAVIGATION */
 
 document.addEventListener("keydown", event => {
     if (event.key === "ArrowRight") {
@@ -464,7 +394,7 @@ document.addEventListener("keydown", event => {
     }
 });
 
-/* Swipe navigation */
+/* SWIPE NAVIGATION */
 
 let touchStartX = 0;
 let touchStartY = 0;
@@ -491,7 +421,7 @@ document.addEventListener("touchend", event => {
     }
 }, { passive: true });
 
-/* Initialize */
+/* INITIALIZE */
 
 showImage(0);
 </script>
