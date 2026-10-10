@@ -57,8 +57,7 @@
       filter: blur(12px);
       mix-blend-mode: multiply;
       transform-origin: center;
-      animation:
-        organic-spin var(--duration) ease-in-out
+      animation: organic-spin var(--duration) ease-in-out
         var(--delay) infinite alternate;
       will-change: transform;
       pointer-events: none;
@@ -245,7 +244,6 @@
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     }
 
-
     /* SHOWCASE */
 
     .showcase {
@@ -321,6 +319,55 @@
       line-height: 1.7;
       color: #222;
       max-width: 360px;
+    }
+
+    /* FINAL IMAGE AND EDITABLE TEXT */
+
+    .closing-section {
+      width: 100%;
+      padding: 0 7vw 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+    }
+
+    .closing-image {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .closing-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain;
+    }
+
+    .closing-text {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 32px;
+      text-align: center;
+      color: #000;
+    }
+
+    .closing-text h2 {
+      font-size: clamp(25px, 3vw, 40px);
+      line-height: 1.1;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      margin-bottom: 18px;
+    }
+
+    .closing-text p {
+      font-size: clamp(14px, 1.1vw, 17px);
+      line-height: 1.7;
+      color: #222;
     }
 
     /* BACK TO TOP */
@@ -401,11 +448,38 @@
       .project-description p {
         font-size: 15px;
       }
+
+      .closing-section {
+        padding: 0 20px 70px;
+      }
+
+      .closing-image img {
+        max-height: none;
+      }
+
+      .closing-text {
+        margin-top: 24px;
+      }
+
+      .closing-text h2 {
+        font-size: 30px;
+      }
+
+      .closing-text p {
+        font-size: 15px;
+      }
     }
 
+    /* REDUCED MOTION ACCESSIBILITY */
+
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .square { animation: none; }
+      html {
+        scroll-behavior: auto;
+      }
+
+      .square {
+        animation: none;
+      }
     }
   </style>
 </head>
@@ -438,9 +512,28 @@
     </div>
   </section>
 
-  <!-- IMAGES AND DESCRIPTIONS -->
+  <!-- SHOWCASE IMAGES AND DESCRIPTIONS -->
 
   <main class="showcase" id="showcase"></main>
+
+  <!-- FINAL IMAGE: logo01.jpg -->
+
+  <section class="closing-section">
+    <div class="closing-image">
+      <img src="logo01.jpg" alt="LAM logo">
+    </div>
+
+    <div class="closing-text">
+      <!-- EDIT YOUR HEADING HERE -->
+      <h2>Thank You for Looking</h2>
+
+      <!-- EDIT YOUR TEXT HERE -->
+      <p>
+        Add your final text here. You can write anything you want
+        about your work, photography, or creative process.
+      </p>
+    </div>
+  </section>
 
   <!-- BACK TO TOP -->
 
@@ -456,7 +549,8 @@
   <script>
     const showcase = document.getElementById("showcase");
 
-    // Add or edit descriptions for your images here.
+    // EDIT YOUR SHOWCASE DESCRIPTIONS HERE.
+
     const descriptions = {
       1: {
         title: "Untitled 01",
@@ -474,34 +568,35 @@
         title: "Sonnencreme",
         text: ""
       },
-        5: {
+      5: {
         title: "Trio",
         text: "LLM URTEIL: Trio – Ein Augenblick der Verbundenheit Drei Menschen stehen am Ufer und genießen den Sonnenuntergang. Das warme Licht und die ruhige Atmosphäre vermitteln ein Gefühl von Freiheit und Zusammengehörigkeit. Die Gesichter bleiben verborgen, wodurch der Moment geheimnisvoll und persönlich wirkt. Als Fotograf möchte ich zeigen, dass oft die einfachen Augenblicke im Leben besonders wertvoll sind. Für mich symbolisiert das Bild Freundschaft, Vergänglichkeit und die Schönheit des gemeinsamen Moments."
       },
-        6: {
+      6: {
         title: "Haus",
         text: "Dach eines Hauses"
       },
-        7: {
+      7: {
         title: "Shadow-Gum",
         text: "Recycled alte Bilder."
       },
-        8: {
+      8: {
         title: "D-Lightful",
         text: "Digital Version"
       },
-        9: {
+      9: {
         title: "freedom",
         text: "boredom"
       },
-        10: {
+      10: {
         title: "Untitled Space",
         text: "Maximalist Version"
       }
     };
 
-    // Set this to the number of your last image.
-    // Example: image37.jpg means TOTAL_IMAGES = 37.
+    // Set this to the number of your last showcase image.
+    // Example: image20.jpg means TOTAL_IMAGES = 20.
+
     const TOTAL_IMAGES = 20;
 
     async function buildShowcase() {
@@ -558,7 +653,6 @@
         project.appendChild(imageContainer);
         project.appendChild(description);
 
-        // Add each image before moving to the next.
         showcase.appendChild(project);
       }
     }
